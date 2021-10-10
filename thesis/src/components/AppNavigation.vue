@@ -1,6 +1,6 @@
 <template>
   <span>
-      <v-toolbar app color="black" dark>
+      <v-toolbar app color="#99b2b7" dark>
       <v-toolbar-title>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -8,7 +8,7 @@
       <v-btn class="hidden-sm-and-down white font-weight-bold black--text ml-3"> Menu </v-btn>
       <v-btn class="hidden-sm-and-down white font-weight-bold black--text ml-3"> Kontakt </v-btn>
       <v-btn class="hidden-sm-and-down white font-weight-bold black--text ml-3"> Moje Konto </v-btn>
-            <v-btn class="hidden-sm-and-down white font-weight-bold black--text ml-3"> Zamów Online </v-btn>
+      <v-btn class="hidden-sm-and-down white font-weight-bold black--text ml-3"> Zamów Online </v-btn>
       </v-toolbar>
   </span>
 </template>

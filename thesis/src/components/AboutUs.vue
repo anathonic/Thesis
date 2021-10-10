@@ -1,13 +1,13 @@
 <template>
   <v-container fluid class="AboutUs">
 <v-content>
-    <div class="text-center" style="margin-top:13%">
-        <h1 class="display-2" style="color: white">
-
+    <div class="text-center" style="margin-top:20%">
+        <h1 class="display-4" style="color: #FFFFFF">
+          Lorem
         </h1>
-<br>
-        <h1 class="display-3" style="color: white">
-
+          <br>
+        <h1 class="display-3" style="color: #FFFFFF">
+          Lorem
         </h1>
     </div>
 </v-content>
@@ -23,7 +23,7 @@ export default {
 <style>
 
     .AboutUs {
-        background: url("../../src/assets/photo-1623157877068-ee3020d09c20.jpeg");
+        background: url("../../src/assets/photo-1555396273-367ea4eb4db5.jpeg");
         background-size: cover;
         background-color: white;
         width: 100%;
