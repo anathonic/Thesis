@@ -1,4 +1,4 @@
-to run:
-npm install
+to run: <br>
+- npm install
 <br>
-npm run serve
+- npm run serve
