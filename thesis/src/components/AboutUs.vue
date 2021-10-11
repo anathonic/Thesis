@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="AboutUs">
 <v-content>
-    <div class="text-center" style="margin-top:20%">
+    <div class="text-center" style="margin-top:10%">
         <h1 class="display-4" style="color: #FFFFFF">
           Lorem
         </h1>
@@ -27,6 +27,6 @@ export default {
         background-size: cover;
         background-color: white;
         width: 100%;
-        height: 50vh;
+        height: 70vh;
     }
 </style>
