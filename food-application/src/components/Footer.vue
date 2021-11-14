@@ -4,7 +4,7 @@
 <footer class="text-center text-lg-start bg-light text-muted">
 
   <section class="">
-    <div class="container text-center text-md-start mt-5">
+    <div class="container text-center text-md-start">
       <div class="row mt-4">
         <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
           <div class="text-center">
@@ -41,12 +41,9 @@
         </p>
         </div>
       </div>
-      <!-- Grid row -->
     </div>
   </section>
-  <!-- Section: Links  -->
 </footer>
-<!-- Footer -->
 </template>
 
 <script>
