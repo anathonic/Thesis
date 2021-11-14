@@ -1,6 +1,6 @@
 <template>
 
-  <div class="aboutus-section">
+  <section class="aboutus-section">
       <Nav/>
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -66,16 +66,15 @@
                 </div>
             </div>
         </div>
-        <Footer/>
-    </div>
+  </section>
 </template>
 
 <script>
-import Footer from '../../components/Footer.vue'
+
 
 import Nav from '../../components/Nav.vue'
 export default {
-  components: { Nav, Footer },
+  components: { Nav},
     name: 'AboutUs'
 }
 </script>
