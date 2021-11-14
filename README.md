@@ -3,6 +3,6 @@ to run: <br>
 - npm run serve
 <br>
 resources: <br>
-- Vue Colors Palette: https://vuetifyjs.com/en/styles/colors/#material-colors <br>
+- Icons from: https://www.flaticon.com <br>
 - Photos from: https://unsplash.com/ (Free to use under the Unsplash License)
 m
