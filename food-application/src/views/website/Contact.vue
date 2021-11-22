@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid px-5 my-5">
-   <Nav/>
+<Nav/>
   <div class="row justify-content-center pt-4">
     <div class="col-xl-10 mt-5">
       <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import Nav from '../../components/Nav.vue'
+import Nav from '../../components/website/Nav.vue'
 export default {
-  components: { Nav},
+  components: {Nav },
     name: 'Contact'
 }
 </script>

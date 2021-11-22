@@ -1,5 +1,4 @@
 <template>
-
   <div class="aboutus-section">
       <Nav/>
         <div class="container">
@@ -71,11 +70,11 @@
 </template>
 
 <script>
-import Footer from '../../components/Footer.vue'
 
-import Nav from '../../components/Nav.vue'
+import Footer from '../../components/website/Footer.vue'
+import Nav from '../../components/website/Nav.vue'
 export default {
-  components: { Nav, Footer },
+  components: {Footer, Nav},
     name: 'AboutUs'
 }
 </script>

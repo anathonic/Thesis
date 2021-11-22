@@ -1,6 +1,6 @@
 <template>
 <section id="mainpage">
-  <Nav/>
+<Nav/>
     <div class="col ms-0 mt-5">
       <div class="hov-img d-flex justify-content-center flex-column">
         <img id="img" src="../../../src/assets/mycollection/jpeg/photo-19.jpeg" alt="" class="">
@@ -58,15 +58,15 @@
                 </div>
             </div>
             </div> 
-          <Footer/>  
+            <Footer/>
     </section> 
 </template>
 
 <script>
-import Footer from '../../components/Footer.vue'
-import Nav from '../../components/Nav.vue'
+import Footer from '../../components/website/Footer.vue'
+import Nav from '../../components/website/Nav.vue'
 export default {
-  components: { Nav, Footer},
+  components: { Footer, Nav },
     name: 'MainPage'
 }
 </script>

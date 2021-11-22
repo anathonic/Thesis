@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light mb-3">
     <div class="container-fluid">
-        <img src="../../src/assets/mycollection/png/food/food-13.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid" alt="Responsive image">
       <form class="d-flex m-2 ">
          <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./login" role="button">Zamów online</a>
         </form>
@@ -41,6 +41,7 @@
 <script>
 
 export default {
+    name: 'Nav'
 
 }
 

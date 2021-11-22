@@ -1,6 +1,6 @@
 <template>
  <div id="register">
-     <Nav/>
+   <Nav/>
    <form class="" @submit.prevent="handleSubmit"> 
         <div class="container">
             <div id="box" class="form pt-4 border-0 rounded-4 shadow-lg overflow-hidden">
@@ -42,7 +42,7 @@
 
 <script>
 import axios from 'axios'
-import Nav from './Nav.vue';
+import Nav from './website/Nav.vue';
 export default {
   components: { Nav },
     name: 'SignUp',
