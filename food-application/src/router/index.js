@@ -6,6 +6,7 @@ import Contact from "../views/website/Contact.vue";
 import AboutUs from "../views/website/AboutUs.vue";
 import Menu from "../views/website/Menu.vue";
 import Ingredients from "../views/admin/Ingredients.vue";
+import Meals from "../views/admin/Meals.vue";
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
     path: '/ingredients',
     name: 'Ingredients',
     component: Ingredients
+  },
+  {
+    path: '/meals',
+    name: 'Meals',
+    component: Meals
   },
 
 

@@ -4,12 +4,12 @@
             <div id="page-content-wrapper">
         <Admin-nav/>
                 <div class="container-fluid">
-                    <h1 class="m-4">Składniki</h1>
+                    <h1 class="m-4">Dania</h1>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Składnik</th>
+      <th scope="col">Danie</th>
       <th scope="col">Status</th>
       <th scope="col">Edytuj</th>
       <th scope="col">Usuń</th>
@@ -17,20 +17,17 @@
   </thead>
   <tbody>
     <tr
-    v-for="ingredient in ingredients"
-    :key="ingredient.IngId"
+    v-for="meal in meals"
+    :key="meal.MealId"
     >
-    <th class="pt-3" scope="row">{{ ingredient.IngId}}</th>
-    <td class="pt-3">{{ ingredient.IngName }}</td>
-    <td class="pt-3">{{ ingredient.Status }}</td>
+    <th class="pt-3" scope="row">{{ meal.Id}}</th>
+    <td class="pt-3">{{ meal.Name }}</td>
+    <td class="pt-3 ps-4">{{ meal.Status }}</td>
     <td>
     <img src="../../../src/assets/mycollection/png/others/edit.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:32px">
     </td>
     <td>
     <img src="../../../src/assets/mycollection/png/others/trash.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:32px">
-            <button
-            v-on:click="destroyIng(ingredient.IngId)"
-          />
     </td>
     </tr>
   </tbody>
@@ -47,26 +44,27 @@ import AdminNav from '../../components/admin/AdminNav.vue'
 import Sidebar from '../../components/admin/Sidebar.vue'
 export default {
   components: { Sidebar, AdminNav },
-    name: 'Ingredients',
+    name: 'Meals',
     data () {
         return {
-            ingredients: [],
+            meals: [],
             url: window.location.origin
         }
     },
     
     methods: {
-        getIng() {
-            axios.get('ingredients').then(response => {
+        getMeals() {
+            axios.get('meals').then(response => {
                 if(response.status >= 200 && response.status < 300){
-                    this.ingredients = response.data.data
+                    this.meals = response.data.data
                 }
                 console.log(response.data);
             })
         },
+
     },
     mounted () {
-        this.getIng()
+        this.getMeals()
         }
     }
 
