@@ -65,14 +65,15 @@
                 </div>
             </div>
         </div>
+        <Footer/>
+  </div>
 </template>
 
 <script>
-
 import Footer from '../../components/website/Footer.vue'
 import Nav from '../../components/website/Nav.vue'
 export default {
-  components: {Footer, Nav},
+  components: {Nav, Footer},
     name: 'AboutUs'
 }
 </script>
