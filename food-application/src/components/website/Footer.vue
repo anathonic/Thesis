@@ -7,9 +7,9 @@
         <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mb-4">
           <div class="text-center">
            <h6 class="text-uppercase fw-bold">Social Media</h6>
-           <img src="../../src/assets/mycollection/png/others/facebook.png" class="img-fluid p-2" alt="Responsive image"> 
-           <img src="../../src/assets/mycollection/png/others/instagram.png" class="img-fluid p-2" alt="Responsive image"> 
-           <img src="../../src/assets/mycollection/png/others/whatsapp.png" class="img-fluid p-2" alt="Responsive image"> 
+           <img src="../../../src/assets/mycollection/png/others/facebook.png" class="img-fluid p-2" alt="Responsive image"> 
+           <img src="../../../src/assets/mycollection/png/others/instagram.png" class="img-fluid p-2" alt="Responsive image"> 
+           <img src="../../../src/assets/mycollection/png/others/whatsapp.png" class="img-fluid p-2" alt="Responsive image"> 
           </div>
         </div>
         
