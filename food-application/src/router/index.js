@@ -7,6 +7,8 @@ import AboutUs from "../views/website/AboutUs.vue";
 import Menu from "../views/website/Menu.vue";
 import Ingredients from "../views/admin/Ingredients.vue";
 import Meals from "../views/admin/Meals.vue";
+import AddMeal from "../views/admin/AddMeal.vue";
+import EditMeal from "../views/admin/EditMeal.vue";
 
 
 const routes = [
@@ -50,6 +52,17 @@ const routes = [
     name: 'Meals',
     component: Meals
   },
+  {
+    path: '/addmeal',
+    name: 'AddMeal',
+    component: AddMeal
+  },
+  {
+    path: '/editmeal',
+    name: 'EditMeal',
+    props: true,
+    component: EditMeal
+  }
 
 
 ];
