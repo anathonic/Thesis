@@ -28,9 +28,7 @@
     </td>
     <td>
     <img src="../../../src/assets/mycollection/png/others/trash.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:32px">
-            <button
-            v-on:click="destroyIng(ingredient.IngId)"
-          />
+
     </td>
     </tr>
   </tbody>

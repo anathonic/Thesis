@@ -8,6 +8,8 @@ import Menu from "../views/website/Menu.vue";
 import Ingredients from "../views/admin/Ingredients.vue";
 import Meals from "../views/admin/Meals.vue";
 import Order from "../views/website/Order.vue"
+import AddMeal from "../views/admin/AddMeal.vue";
+import EditMeal from "../views/admin/EditMeal.vue";
 
 
 const routes = [
@@ -56,6 +58,17 @@ const routes = [
     name: 'Order',
     component: Order
   },
+  {
+    path: '/addmeal',
+    name: 'AddMeal',
+    component: AddMeal
+  },
+  {
+    path: '/editmeal',
+    name: 'EditMeal',
+    props: true,
+    component: EditMeal
+  }
 
 
 ];
