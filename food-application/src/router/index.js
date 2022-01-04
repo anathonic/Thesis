@@ -7,6 +7,7 @@ import AboutUs from "../views/website/AboutUs.vue";
 import Menu from "../views/website/Menu.vue";
 import Ingredients from "../views/admin/Ingredients.vue";
 import Meals from "../views/admin/Meals.vue";
+import Order from "../views/website/Order.vue"
 
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
     path: '/meals',
     name: 'Meals',
     component: Meals
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: Order
   },
 
 
