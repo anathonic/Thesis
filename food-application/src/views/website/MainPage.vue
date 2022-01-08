@@ -1,7 +1,6 @@
 <template>
 <section id="mainpage">
 <Nav/>
-    <div class="col ms-0 mt-5">
       <div class="hov-img d-flex justify-content-center flex-column">
         <img id="img" src="../../../src/assets/mycollection/jpeg/photo-19.jpeg" alt="" class="">
         <div class="dot-section">
@@ -10,7 +9,6 @@
         <div class="text-center centered">SUSHI RESTAURANT</div>
         </div>
       </div>
-    </div> 
       <div class="container-fluid text-center">
         <h1 class="container-h1 mt-5 mb-5">W naszej ofercie znajdziesz:</h1>
           <div class="row">
@@ -112,7 +110,7 @@ export default {
   border-width: 0.7vw;
   border-style: solid;
   border-color: rgb(0,22,41);
-  color: rgb(248,249,250);
+  color: rgb(0,22,41);
   position: absolute;
   top: 45vw;
   left: 50vw;

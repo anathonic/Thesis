@@ -1,6 +1,7 @@
 <template>
+<div id="orde">
+<User-nav/>
 <div class="container-fluid px-5 my-5">
-<Nav/>
     <div class="container" id="Order">
         <div class="order-container">
             <br>
@@ -52,14 +53,15 @@
     </div>
     <basketModal :total-price="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
 </div>
+</div>
 </template>
 
 <script>
 import basketModal from '../../components/website/basket-modal-component.vue';
 import axios from 'axios'
-import Nav from '../../components/website/Nav.vue'
+import UserNav from '../../components/user/UserNav.vue';
 export default {
-  components: {Nav, basketModal},
+  components: {basketModal, UserNav},
     name: 'Order',
     data () {
         return {
