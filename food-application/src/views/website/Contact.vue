@@ -1,7 +1,8 @@
 <template>
-<div class="container-fluid px-5 my-5">
-<Nav/>
-  <div class="row justify-content-center pt-4">
+<div id="contact">
+  <Nav/>
+<div class="container-fluid px-5 my-3">
+  <div class="row justify-content-center">
     <div class="col-xl-10 mt-5">
       <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
         <div class="card-body p-0">
@@ -9,7 +10,7 @@
             <div class="col-sm-6 d-none d-sm-block bg-image"></div>
             <div class="col-sm-6 p-4">
               <div class="text-center">
-                          <img src="../../../src/assets/mycollection/png/contact/mail-7.png" class="img-fluid mb-2" alt="Responsive image">
+                <img src="../../../src/assets/mycollection/png/contact/mail-7.png" class="img-fluid mb-2" alt="Responsive image">
                 <div class="h3 fw-light">Formularz kontaktowy</div>
                 <p class="mb-4 text-muted">Wyślij do nas e-mail!</p>
               </div>
@@ -58,6 +59,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </template>
 

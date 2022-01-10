@@ -1,9 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light mb-3" id="navbar">
+  <nav class="navbar navbar-expand-md navbar-light bg-light" id="navbar">
     <div class="container-fluid">
-        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid" alt="Responsive image">
+     <router-link to="/">
+        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid mb-3" alt="Responsive image">
+     </router-link> 
       <form class="d-flex m-2 ">
-         <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./order" role="button">Zamów online</a>
+         <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./login" role="button">Zamów online</a>
         </form>
       <button
         class="navbar-toggler"
@@ -17,7 +19,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 ms-2 mb-md-0">
+        <ul class="navbar-nav me-auto mb-3 mt-0 ms-2 mb-md-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="./">Strona główna</a>
           </li>

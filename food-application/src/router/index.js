@@ -10,9 +10,28 @@ import Meals from "../views/admin/Meals.vue";
 import Order from "../views/website/Order.vue"
 import AddMeal from "../views/admin/AddMeal.vue";
 import EditMeal from "../views/admin/EditMeal.vue";
-
-
+import Panel from "../views/admin/Panel.vue";
+import Dashboard from "../views/user/Dashboard.vue";
+import Account from "../views/user/Account.vue";
+import Settings from "../views/user/Settings.vue";
 const routes = [
+
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: Account
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
+  },
+  
   {
     path: '/login',
     name: 'Login',
@@ -68,8 +87,12 @@ const routes = [
     name: 'EditMeal',
     props: true,
     component: EditMeal
+  },
+  {
+  path: '/panel',
+  name: 'Panel',
+  component: Panel
   }
-
 
 ];
 
