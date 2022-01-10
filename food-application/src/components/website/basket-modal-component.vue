@@ -126,16 +126,15 @@ import axios from 'axios'
             setTimeout( () => this.$router.push({ path: '/'}), 6500);
         },
         sendOrder() {
-            var currentDate = new Date(Date.now());
-            var endDate = new Date(currentDate.getTime() + 30 * 60000);
-            var formatedDate = currentDate.getFullYear() + '-' + currentDate.getMonth() + '-' + currentDate.getDay() + ' ' +
-            currentDate.getHours() + '-' + currentDate.getMinutes() + '-' + currentDate.getSeconds();
-            var formatedEndDate = endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDay() + ' ' +
-            endDate.getHours() + '-' + endDate.getMinutes() + '-' + endDate.getSeconds();
+            let currentDate = new Date(Date.now());
+            //obcięcie znaczników strefy czasowej z formatu daty żeby format zgadzał się z DB
+            let startDate = new Date(currentDate).toJSON().slice(0, 19).replace('T', ' ');
+            //opóźnienie by pokazać róznice w dacie zamówienia oraz dacie finalizacji zamówienia (ze względu na to że enddate w DB not null)
+            let endDate = new Date(currentDate.getTime() + 30 * 60000).toJSON().slice(0, 19).replace('T', ' ');
 
             axios.post('order?OrderNo='+this.stringGen()+'&User='+this.email+'&Phone='+this.phone+'&Name='+this.userName+'&Address='+this.address+
             '&Postal='+this.postal+'&City='+this.city+'&Details='+JSON.stringify(this.orderData)+'&OrderPrice='+this.totalPrice+
-            '&OrderDate='+formatedDate+'&EndDate='+formatedEndDate+'').then(response => {
+            '&OrderDate='+startDate+'&EndDate='+endDate+'').then(response => {
                 if(response.status >= 200 && response.status < 300){
                     console.log(response.data);
                     console.log("success");
