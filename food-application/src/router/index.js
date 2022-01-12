@@ -12,6 +12,8 @@ import Panel from "../views/admin/Panel.vue";
 import Dashboard from "../views/user/Dashboard.vue";
 import Account from "../views/user/Account.vue";
 import Settings from "../views/user/Settings.vue";
+import Orders from "../views/admin/Orders.vue";
+
 const routes = [
 
   {
@@ -80,8 +82,12 @@ const routes = [
   path: '/panel',
   name: 'Panel',
   component: Panel
-  }
-
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    component: Orders
+    }
 ];
 
 const router = createRouter({
