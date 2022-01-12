@@ -41,9 +41,8 @@ export default {
       password: ''
     });
     const router = useRouter();
-
     const submit = async () => {
-      await fetch('http://192.168.1.12:8000/api/login', {
+      await fetch('http://localhost:8000/api/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

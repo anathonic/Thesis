@@ -15,10 +15,10 @@
                     </div>
                 </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
-                <!-- <h1 class="text-center">Zamówienia</h1> -->
+                <h1 class="text-center">Zamówienia</h1>
                                 <div class="feature-content d-flex align-items-center">
                                     <div class="text-center m-3">
-                                  
+
                                     </div>
                                 </div>
         </div>
