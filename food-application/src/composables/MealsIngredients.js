@@ -1,11 +1,10 @@
 
 import { ref } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
 
 export default function useIngredients() {
     const mealsIngredients = ref([])
-    const router = useRouter()
+  
     const errors = ref('')
 
     const getMealsIngredients = async (MealId) =>{

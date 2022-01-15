@@ -16,6 +16,9 @@
     <label>Hasło</label>
     <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
 </div>
+        <div class="form-group">
+          <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+        </div>
     <p class="mt-2">Nie masz jeszcze konta? <a style="color: #000000;" href="./register">Zarejestruj się</a>.</p>
               <div class="merge d-flex justify-content-center flex-column">
       <button class="btn btn-light shadow-sm btn-block btn-lg mb-4">Zaloguj się</button>
@@ -30,12 +33,14 @@
 <script>
 import {reactive} from 'vue';
 import {useRouter} from "vue-router";
+import { ref } from 'vue';
 import Nav from './website/Nav.vue';
 
 export default {
   components: { Nav },
   name: "Login",
   setup() {
+    const message = ref();
     const data = reactive({
       email: '',
       password: ''
@@ -47,12 +52,21 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
         body: JSON.stringify(data)
-      });
+      }).then(async response => {
+      const data = await response.json();
+      if (!response.ok) {
+        const error = (data && data.message) || response.statusText;
+         message.value = error;
+        return Promise.reject(error);
 
-      await router.push('/dashboard');
+      }
+      router.push('dashboard');
+      
+    });
+
     }
-
     return {
+      message,
       data,
       submit
     }

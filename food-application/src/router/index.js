@@ -13,6 +13,8 @@ import Dashboard from "../views/user/Dashboard.vue";
 import Account from "../views/user/Account.vue";
 import Settings from "../views/user/Settings.vue";
 import Orders from "../views/admin/Orders.vue";
+import MealsEdit from "../views/admin/MealsEdit.vue";
+import IngredientsEdit from "../views/admin/IngredientsEdit.vue";
 
 const routes = [
 
@@ -24,7 +26,7 @@ const routes = [
   {
     path: '/account',
     name: 'Account',
-    component: Account
+    component: Account,
   },
   {
     path: '/settings',
@@ -64,12 +66,12 @@ const routes = [
   },
   {
     path: '/ingredients',
-    name: 'Ingredients',
+    name: 'Ingredients.index',
     component: Ingredients
   },
   {
     path: '/meals',
-    name: 'Meals',
+    name: 'meals.index',
     component: Meals
   },
   {
@@ -87,7 +89,19 @@ const routes = [
     path: '/orders',
     name: 'Orders',
     component: Orders
-    }
+    },
+    {
+      path: '/ingredients/:IngId/edit',
+      name: 'Ingredients.edit',
+      component: IngredientsEdit,
+      props: true
+  },
+  {
+    path: '/meals/:MealId/edit',
+    name: 'meals.edit',
+    component: MealsEdit,
+    props: true
+}
 ];
 
 const router = createRouter({
