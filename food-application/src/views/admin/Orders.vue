@@ -1,7 +1,10 @@
 <template>
   <div id="orders">
       <Admin-nav/>
-      <div class="container">
+      <div class="container d-flex flex-column align-items-center">
+          <div class="text-center">
+              <h2>Zamówienia</h2>
+          </div>
           <tbody>
               <tr 
     v-for="order in orders"
@@ -10,13 +13,14 @@
 <vue-collapsible-panel-group>
     <vue-collapsible-panel :expanded="false">
         <template #title>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column text-center">
     <td class="pt-3">Zamówienie numer: {{ order.OrderNo }} </td>
-    <td class="pt-3">{{ order.OrderDate }} </td>
+    <td class="pt-3"><h5>{{ order.OrderDate }}</h5> </td>
     </div>
         </template>
         <template #content>
     <div class="d-flex flex-column">
+        <h5>Szczegóły zamówienia:</h5>
     <td class="pt-3" >Dania: {{ order.Details }}</td>
     <td class="pt-3">Imię i nazwisko: {{ order.Name }}</td>
     <td class="pt-3">Ulica: {{ order.Address }}</td>

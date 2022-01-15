@@ -17,7 +17,7 @@
     <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
 </div>
         <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+          <div v-if="message" class="alert alert-danger text-center mt-3" role="alert">{{message}}</div>
         </div>
     <p class="mt-2">Nie masz jeszcze konta? <a style="color: #000000;" href="./register">Zarejestruj się</a>.</p>
               <div class="merge d-flex justify-content-center flex-column">
@@ -54,13 +54,19 @@ export default {
         body: JSON.stringify(data)
       }).then(async response => {
       const data = await response.json();
+      localStorage.setItem('user',JSON.stringify(data.user))
+      localStorage.setItem('jwt',data.token)
+      console.log(data.token);
       if (!response.ok) {
         const error = (data && data.message) || response.statusText;
          message.value = error;
         return Promise.reject(error);
-
       }
-      router.push('dashboard');
+             if (localStorage.getItem('jwt') != null) {
+            
+                router.push('dashboard')
+            
+             }
       
     });
 

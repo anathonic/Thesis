@@ -18,7 +18,9 @@
         </div>    
     </div>
     <div class="col-md-2">
+        <router-link to="/orders">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
+        </router-link>
         <div class="text-center">
         <p>Zamówienia</p>
         </div>
