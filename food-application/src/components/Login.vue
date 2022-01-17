@@ -2,7 +2,7 @@
  <div id="login">
  <Nav/>
    <form @submit.prevent="submit"> 
-        <div class="container mt-2">
+        <div class="container mt-5">
             <div id="box" class="form pt-4 border-0 rounded-4 shadow-lg overflow-hidden">
                 <div class="text-center">
                 <img src="../../src/assets/mycollection/png/user/user-7.png" class="mb-2">

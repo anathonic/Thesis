@@ -7,7 +7,7 @@
                         <div class="text-center">
                          <img src="../../../src/assets/mycollection/png/others/avatar.png" class="img-fluid" alt="Responsive image">
                          </div>
-                         <div class="mt-3 d-flex flex-column align-items-center">
+                         <div class="mt-3 text-center d-flex flex-column align-items-center">
     <p>Nazwa uzytkownika: {{user_name}}</p>
     <p>Adres e-mail: {{ user_email }}</p>
     <p>Jesteś z nami od: {{ user_created }}</p>

@@ -91,7 +91,6 @@ const routes = [
       requiresAuth: true
     }
   },
-  
   {
   path: '/panel',
   name: 'Panel',
@@ -122,7 +121,7 @@ const router = createRouter({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('jwt') == 'null' ) {
+    if (localStorage.getItem('jwt') == ('null' || null) ) {
       next({
         path: '/login',
         params: { nextUrl: to.fullPath }

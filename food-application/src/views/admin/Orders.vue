@@ -2,7 +2,7 @@
   <div id="orders">
       <Admin-nav/>
       <div class="container d-flex flex-column align-items-center">
-          <div class="text-center">
+          <div class="text-center mt-0 mb-5">
               <h2>Zamówienia</h2>
           </div>
           <tbody>
