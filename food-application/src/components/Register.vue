@@ -48,7 +48,8 @@ export default {
     const data = reactive({
       name: '',
       email: '',
-      password: ''
+      password: '',
+      role: 1,
     });
     const router = useRouter();
     const submit = async () => {

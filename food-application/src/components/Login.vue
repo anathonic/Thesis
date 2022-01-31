@@ -57,6 +57,7 @@ export default {
       localStorage.setItem('user',JSON.stringify(data.user))
       localStorage.setItem('jwt',data.token)
       console.log(data.token);
+      console.log(data.role)
       if (!response.ok) {
         const error = (data && data.message) || response.statusText;
          message.value = error;
