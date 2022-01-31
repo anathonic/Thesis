@@ -20,6 +20,6 @@ https://getbootstrap.com/docs/5.0/getting-started/introduction/
 </p>
 <h4 align="center">Mobile views:</h4>
 <p align="center">
-<img width="150" height="360" src="images/user_dashboard_mobile.png">
+<img style="margin-right: 30px;" width="150" height="360" src="images/user_dashboard_mobile.png">
 <img width="150" height="360" src="images/admin_dashboard_mobile.png">
 </p>
