@@ -9,11 +9,11 @@ resources: <br>
 Bootstrap 5 documentation: <br>
 
 https://getbootstrap.com/docs/5.0/getting-started/introduction/
+<h4>User dashboard:</h4>
 <p align="center">
-<h3>User dashboard:</h3>
 <img width="520" height="360" src="images/user_dashboard.png">
 </p>
+<h4>Admin dashboard:</h4>
 <p align="center">
-<h3>Admin dashboard:</h3>
 <img width="520" height="360" src="images/admin_dashboard.png">
 </p>
