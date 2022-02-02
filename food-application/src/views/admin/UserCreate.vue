@@ -1,13 +1,18 @@
 <template>
 <div id="create">
     <admin-nav/>
+    <div class="container mt-5">
+            <div id="box" class="form pt-4 border-0 rounded-4 shadow-lg overflow-hidden">
       <form @submit.prevent="submit"> 
+              <div class="text-center">
+        <h2>Nowy użytkownik</h2>
+      </div>
          <div class="form-group">
   <label>Imię</label>
   <input v-model="data.name" class="form-control" placeholder="Name" required>
 </div>
 <div class="form-group">
-    <label>Email</label>
+    <label>E-mail</label>
     <input v-model="data.email" type="email" class="form-control" placeholder="Email" required>
 </div>
 <div class="form-group">
@@ -23,8 +28,12 @@
  <option value="1">User</option>
 </select>
  </div>
- <button class="btn btn-light shadow-sm btn-block btn-lg mt-2">Dodaj uzytkownika</button>
+ <div class="text-center">
+ <button class="btn btn-dark shadow-sm btn-block mt-2">Stwórz</button>
+  </div>
         </form>
+            </div>
+    </div>
 </div>
 </template>
 

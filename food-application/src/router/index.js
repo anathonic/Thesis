@@ -15,7 +15,9 @@ import Settings from "../views/user/Settings.vue";
 import Orders from "../views/admin/Orders.vue";
 import MealsEdit from "../views/admin/MealsEdit.vue";
 import IngredientsEdit from "../views/admin/IngredientsEdit.vue";
+import UsersManagement from "../views/admin/UsersManagement.vue";
 import UserCreate from "../views/admin/UserCreate.vue";
+
 
 const routes = [
 
@@ -113,6 +115,12 @@ const routes = [
     name: 'meals.edit',
     component: MealsEdit,
     props: true
+},
+{
+  path: '/usersmanagement',
+  name: 'UsersManagement',
+  component: UsersManagement,
+  props: true
 },
 {
   path: '/usercreate',

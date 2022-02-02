@@ -20,10 +20,6 @@
     <label>Hasło</label>
     <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
 </div>
-<!-- <div class="form-group">
-    <label>Potwierdź hasło</label>
-    <input type="password" class="form-control" v-model="password_confirm" placeholder="Potwierdź hasło"/>
-</div> -->
         <div class="merge d-flex justify-content-center flex-column">
       <button class="btn btn-light shadow-sm btn-block btn-lg mt-2">Zarejestruj się</button>
              <p class="mt-2 mb-1">Tworząc konto, wyrażasz zgodę na nasze  <br><a style="color: #000000;" href="#">Warunki i Prywatności</a>.</p>
