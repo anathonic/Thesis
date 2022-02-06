@@ -13,7 +13,7 @@
                     <div class="order-col basket">
                         <button class="basket-summary" @click="openModal">
                             <img src="../../../src/assets/mycollection/png/others/picnic-basket.png" class="img-fluid mt-0 ms-0" alt="Responsive image" style="width:32px">
-                            <span class="order-amount">({{productsAmount}})</span>
+                            <span class="order-amount">({{$store.state.productsAmount}})</span>
                         </button>
                     </div>
                 </div>
@@ -60,6 +60,31 @@
 import basketModal from '../../components/website/basket-modal-component.vue';
 import axios from 'axios'
 import UserNav from '../../components/user/UserNav.vue';
+import Vuex from 'vuex'
+const $store = new Vuex.Store({
+  state: {
+    productsAmount: 0,
+    orderData: [],
+    totalPrice: 0.00
+  },
+  mutations: {
+    increment (state) {
+        state.productsAmount++
+    },
+    decrement (state) {
+        state.productsAmount--
+    },
+    add (state, {Name: MealName, Price: MealPrice}) {
+        state.orderData.push({
+            Name: MealName,
+            Price: MealPrice
+        })
+    },
+    delete (state, index) {
+        state.orderData.splice(index, 0)
+    }
+  }
+})
 export default {
   components: {basketModal, UserNav},
     name: 'Order',
@@ -69,7 +94,7 @@ export default {
             url: window.location.origin,
             showModal: false,
             orderData: [],
-            productsAmount: 0,
+            $store: $store,
             totalPrice: 0.00
         }
     },
@@ -83,27 +108,29 @@ export default {
             })
         },
         addToBasket(MealName, MealPrice) {
-            this.orderData.push({
-                Name: MealName,
-                Price: MealPrice
-            })
+            $store.commit('add', {Name: MealName, Price: MealPrice});
             //eslint-disable-next-line
-            this.totalPrice += parseFloat(MealPrice.replace(/[^\d\.]/g, ""));
-            this.totalPrice = Number((this.totalPrice).toFixed(2));
-            this.productsAmount += 1;
-            console.log(MealName, MealPrice, this.totalPrice);
+            $store.state.totalPrice += parseFloat(MealPrice.replace(/[^\d\.]/g, ""));
+            $store.state.totalPrice = Number(($store.state.totalPrice).toFixed(2));
+            this.totalPrice = $store.state.totalPrice;
+            $store.commit('increment');
         },
         deleteThisRow(index, positionPrice) {
             this.orderData.splice(index, 1);
-            this.productsAmount -= 1;
+            $store.commit('decrement');
+            $store.commit('delete', index);
             //eslint-disable-next-line
-            this.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
-            this.totalPrice = Number((this.totalPrice).toFixed(2));
+            $store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
+            $store.state.totalPrice = Number(($store.state.totalPrice).toFixed(2));
+            this.totalPrice = $store.state.totalPrice;
         },
         openModal() {
             this.showModal = true;
             document.getElementById("Order").style.filter = "blur(2px)";
             document.getElementById("navbar").style.filter = "blur(2px)";
+            this.orderData = $store.state.orderData;
+            this.totalPrice = $store.state.totalPrice;
+            console.log($store.state.orderData)
         },
         onChildClick () {
             this.showModal = false;
