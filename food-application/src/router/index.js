@@ -8,28 +8,42 @@ import Menu from "../views/website/Menu.vue";
 import Ingredients from "../views/admin/Ingredients.vue";
 import Meals from "../views/admin/Meals.vue";
 import Order from "../views/website/Order.vue"
-import AddMeal from "../views/admin/AddMeal.vue";
-import EditMeal from "../views/admin/EditMeal.vue";
 import Panel from "../views/admin/Panel.vue";
 import Dashboard from "../views/user/Dashboard.vue";
 import Account from "../views/user/Account.vue";
 import Settings from "../views/user/Settings.vue";
+import Orders from "../views/admin/Orders.vue";
+import MealsEdit from "../views/admin/MealsEdit.vue";
+import IngredientsEdit from "../views/admin/IngredientsEdit.vue";
+import UsersManagement from "../views/admin/UsersManagement.vue";
+import UserCreate from "../views/admin/UserCreate.vue";
+
+
 const routes = [
 
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/account',
     name: 'Account',
-    component: Account
+    component: Account,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/settings',
     name: 'Settings',
-    component: Settings
+    component: Settings,
+    meta: {
+      requiresAuth: true
+    }
   },
   
   {
@@ -64,41 +78,89 @@ const routes = [
   },
   {
     path: '/ingredients',
-    name: 'Ingredients',
+    name: 'Ingredients.index',
     component: Ingredients
   },
   {
     path: '/meals',
-    name: 'Meals',
+    name: 'meals.index',
     component: Meals
   },
   {
     path: '/order',
     name: 'Order',
-    component: Order
-  },
-  {
-    path: '/addmeal',
-    name: 'AddMeal',
-    component: AddMeal
-  },
-  {
-    path: '/editmeal',
-    name: 'EditMeal',
-    props: true,
-    component: EditMeal
+    component: Order,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
   path: '/panel',
   name: 'Panel',
   component: Panel
-  }
-
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    component: Orders
+    },
+    {
+      path: '/ingredients/:IngId/edit',
+      name: 'Ingredients.edit',
+      component: IngredientsEdit,
+      props: true
+  },
+  {
+    path: '/meals/:MealId/edit',
+    name: 'meals.edit',
+    component: MealsEdit,
+    props: true
+},
+{
+  path: '/usersmanagement',
+  name: 'UsersManagement',
+  component: UsersManagement,
+  props: true
+},
+{
+  path: '/usercreate',
+  name: 'UserCreate',
+  component: UserCreate,
+  props: true
+}
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (localStorage.getItem('jwt') == ('null' || null) ) {
+      next({
+        path: '/login',
+        params: { nextUrl: to.fullPath }
+      })
+    } else {
+      let user = JSON.parse(localStorage.getItem('user'))
+      if (to.matched.some(record => record.meta.is_admin)) {
+        if (user.is_admin == 1) {
+          next()
+        } else {
+          next({ name: 'userboard' })
+        }
+      } else {
+        next()
+      }
+    }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (localStorage.getItem('jwt') == null) {
+      next()
+    } else {
+      next({ name: 'userboard' })
+    }
+  } else {
+    next()
+  }
+})
 export default router;

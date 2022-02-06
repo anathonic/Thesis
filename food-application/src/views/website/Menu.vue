@@ -1,13 +1,15 @@
 <template>
-  <Nav/>
+  <div id="menu">
+      <Nav/>
+  </div>
 </template>
 
 <script>
 import Nav from '../../components/website/Nav.vue'
 export default {
-  components: { Nav},
-    name: 'Main Page'
+     components: { Nav }
 }
+
 </script>
 
 <style>

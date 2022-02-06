@@ -83,11 +83,12 @@ export default {
       }
     });
     const logout = async () => {
-      await fetch('http://192.168.1.12:8000/api/logout', {
+      await fetch('http://localhost:8000/api/logout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
       });
+      localStorage.setItem('jwt',null)
       await router.push('/');
     }
     return {

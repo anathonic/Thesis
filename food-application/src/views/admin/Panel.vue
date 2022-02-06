@@ -18,7 +18,9 @@
         </div>    
     </div>
     <div class="col-md-2">
+        <router-link to="/orders">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
+        </router-link>
         <div class="text-center">
         <p>Zamówienia</p>
         </div>
@@ -36,9 +38,11 @@
         </div>
     </div>
     <div class="col-md-2">
+        <router-link to="/usersmanagement">
 <img src="../../../src/assets/mycollection/png/others/settings-1.png" class="img-fluid" alt="Responsive image">
+        </router-link>
        <div class="text-center">
-        <p>Ustawienia </p>
+        <p>Użytkownicy </p>
         </div>
     </div>
 </div>

@@ -17,6 +17,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Cuprum:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cuprum:wght@500&family=DM+Sans:wght@500&display=swap');
 
+*{
+font-family: 'DM Sans', sans-serif;
+}
 .container {
     margin-top: 130px;
     display: flex;
