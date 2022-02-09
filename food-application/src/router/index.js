@@ -52,18 +52,23 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
-  //     beforeEnter: (to, from, next) => {
-  //       if(localStorage.getItem('role') == 'user'){
-  //         next({
-  //           path: '/dashboard',
-  //           params: { nextUrl: to.fullPath }
-  //         })
-
-  //       }else{
-  //        next();
-  //       }
+      beforeEnter: (to, from, next) => {
+        if((localStorage.getItem('role') == 'user')&& (localStorage.getItem('jwt') != 'null')) {
+          next({
+            path: '/dashboard',
+            params: { nextUrl: to.fullPath }
+          })
+        }
+        else if((localStorage.getItem('role') == 'admin')&& (localStorage.getItem('jwt') != 'null')) {
+            next({
+              path: '/panel',
+              params: { nextUrl: to.fullPath }
+            })
+        }else{
+         next();
+        }
  
-  // },
+  },
   },
   {
     path: '/register',
