@@ -15,6 +15,7 @@
       <th class="el" scope="col"><p>Danie</p></th>
       <th class="el" scope="col"><p>Cena</p></th>
       <th class="el" scope="col"><p>Status</p></th>
+      <th class="el" scope="col"><p>Kategoria</p></th>
       <th class="el" scope="col"><p>Edytuj</p></th>
       <th class="el" scope="col"><p>Usuń</p></th>
     </tr>
@@ -27,6 +28,7 @@
     <td class="price pt-3">{{ meal.Name }}</td>
     <td class="pt-3">{{ meal.Price}}zł</td>
     <td class="pt-3">{{ meal.StatusName }}</td>
+    <td class="pt-3">{{ meal.CategoryName}}</td>
     <td>
     <img
      src="../../../src/assets/mycollection/png/others/edit.png"
@@ -68,6 +70,15 @@
                                     </select>
                                     <label for="Status">Status</label>
                                 </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="Status" v-model="form.Category">
+                                        <option value="">-- Wybierz --</option>
+                                        <option value="1">Dania główne</option>
+                                        <option value="2">Przystawki</option>
+                                        <option value="3">Napoje</option>
+                                    </select>
+                                    <label for="Status">Kategoria</label>
+                                </div>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-success" data-bs-dismiss="modal" >Dodaj</button>
@@ -97,10 +108,10 @@ import { onMounted, reactive } from "vue"
                 Name: '',
                 Status: '',
                 Price: '',
+                Category: '',
             })
 
             onMounted(getMeals)
-
             const saveMeal = async () => {
                 await storeMeal({...form});
                 await getMeals();

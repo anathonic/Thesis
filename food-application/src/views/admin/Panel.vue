@@ -11,6 +11,14 @@
         <p>Dania</p>
         </div>
         </div>
+         <div class="col-md-2">
+        <router-link to="/ingredients">
+        <img src="../../../src/assets/mycollection/png/food/food-14.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Składniki</p>
+        </div>
+        </div>
     <div class="col-md-2">
 <img src="../../../src/assets/mycollection/png/others/chef.png" class="img-fluid" alt="Responsive image">
         <div class="text-center">

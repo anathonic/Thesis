@@ -25,6 +25,15 @@
                                 </select>
                                 <label for="Status">Status</label>
                             </div>
+                             <div class="form-floating mb-3">
+                                <select class="form-select" id="Category" v-model="meal.Category">
+                                    <option value="">-- Wybierz --</option>
+                                    <option value="1">Dania główne</option>
+                                    <option value="2">Przystawki</option>
+                                    <option value="3">Napoje</option>
+                                </select>
+                                <label for="Status">Kategoria</label>
+                            </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-dark">Zapisz</button>
                             </div>
