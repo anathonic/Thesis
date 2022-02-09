@@ -19,12 +19,7 @@
         <p>Składniki</p>
         </div>
         </div>
-    <div class="col-md-2">
-<img src="../../../src/assets/mycollection/png/others/chef.png" class="img-fluid" alt="Responsive image">
-        <div class="text-center">
-        <p>Kuchnia</p>
-        </div>    
-    </div>
+
     <div class="col-md-2">
         <router-link to="/orders">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
@@ -33,12 +28,7 @@
         <p>Zamówienia</p>
         </div>
     </div>
-    <div class="col-md-2">
-<img src="../../../src/assets/mycollection/png/others/calendar.png" class="img-fluid" alt="Responsive image">
-     <div class="text-center">
-        <p>Rezerwacje</p>
-        </div>
-    </div>
+
     <div class="col-md-2">
 <img src="../../../src/assets/mycollection/png/payment/payment-2.png" class="img-fluid" alt="Responsive image">
         <div class="text-center">

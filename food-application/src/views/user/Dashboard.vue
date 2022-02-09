@@ -90,7 +90,7 @@ export default {
         credentials: 'include',
       });
       localStorage.setItem('jwt', null)
-      localStorage.setItem('user', null)
+      localStorage.setItem('role', null)
       await router.push('/');
     }
     return {

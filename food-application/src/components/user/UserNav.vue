@@ -2,13 +2,17 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" id="navbar">
     <div class="container-fluid">
+           <router-link to="/">
+        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid mb-3" alt="Responsive image">
+     </router-link> 
+           <!-- <form class="d-flex m-2 ">
+         <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./login" role="button">Zamów online</a>
+        </form> -->
         <div class="mt-3 mx-4" id="hi_user">
           <p>{{message}}</p>
         </div>
-        <router-link to="/dashboard">
-        <img src="../../../src/assets/mycollection/png/others/menu.png" class="img-fluid mx-2" alt="Responsive image">
-        </router-link>
-      <!-- <button
+        
+      <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -19,32 +23,18 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="!auth">
-          <li class="nav-item">
-            <router-link to="/login" class="nav-link">Zaloguj się</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/register" class="nav-link">Zarejestruj się</router-link>
-          </li>
-        </ul>
+      <div class="mt-2 collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto mt-4 mt-lg-0 p-2">
+                <li class="nav-item active"><a class="nav-link" href="/dashboard">Panel główny</a></li>
+                 <li class="nav-item active"><a class="nav-link" href="/account">Konto</a></li>
+                  <li class="nav-item active"><a class="nav-link" href="/order">Zamów online</a></li>
+                   <li class="nav-item active"><a class="nav-link" href="/cart">Koszyk</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/orders">Twoje zamówienia</a></li>
+                     <li class="nav-item active"><a class="nav-link" href="/settings">Ustawienia</a></li>
+                   <li class="nav-item active"><p @click="logout"  class="nav-link"  href=""> Wyloguj</p></li>
+            </ul>
 
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="auth">
-          <li class="nav-item">
-            <a href="/order" class="nav-link">Menu</a> 
-          </li>
-          <li class="nav-item">
-            <a href="/cart" class="nav-link">Koszyk</a> 
-          </li>
-          <li class="nav-item">
-            <a href="/account" class="nav-link">Konto</a> 
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link" @click="logout">Wyloguj się</a> 
-          </li>
-        </ul>
-
-      </div> -->
+      </div>
     </div>
   </nav>
 </template>
@@ -85,8 +75,9 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
       });
-      localStorage.getItem('jwt') == null;
-      await router.push('/login');
+      localStorage.setItem('jwt', null)
+      localStorage.setItem('role', null)
+      await router.push('/');
     }
     return {
       message,
