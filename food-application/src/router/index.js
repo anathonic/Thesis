@@ -53,11 +53,13 @@ const routes = [
     name: 'Login',
     component: Login,
       beforeEnter: (to, from, next) => {
-        if((localStorage.getItem('role') == 'user')&& (localStorage.getItem('jwt') != 'null')) {
+        if((localStorage.getItem('role') == 'user') && (localStorage.getItem('jwt') != 'null' )) {
+          
           next({
             path: '/dashboard',
             params: { nextUrl: to.fullPath }
           })
+          
         }
         else if((localStorage.getItem('role') == 'admin')&& (localStorage.getItem('jwt') != 'null')) {
             next({
@@ -193,6 +195,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log('tets');
+    console.log(localStorage.getItem('user'));
+    console.log(localStorage.getItem('role'));
     if ((localStorage.getItem('jwt') == null) || (localStorage.getItem('jwt') == 'null')) {
       next({
         path: '/login',
