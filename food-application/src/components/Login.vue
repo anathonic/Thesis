@@ -56,20 +56,23 @@ export default {
         body: JSON.stringify(data)
       }).then(async response => {
       const data = await response.json();
+      let name = data.role[0].name;
       localStorage.setItem('user',JSON.stringify(data.user))
       localStorage.setItem('jwt',data.token)
-      console.log(data.token);
-      console.log(data.role)
+      localStorage.setItem('role',data.role[0].name)
       if (!response.ok) {
         const error = (data && data.message) || response.statusText;
          message.value = error;
         return Promise.reject(error);
       }
-             if (localStorage.getItem('jwt') != null) {
+            if (localStorage.getItem('jwt') != null) {
+              if(name == 'admin'){
+                router.push('/panel')
+              }else{
+                router.push('/dashboard')
+              }
             
-                router.push('dashboard')
-            
-             }
+           }
       
     });
 

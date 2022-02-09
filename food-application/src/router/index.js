@@ -26,8 +26,10 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+
     }
+
   },
   {
     path: '/account',
@@ -49,7 +51,19 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+  //     beforeEnter: (to, from, next) => {
+  //       if(localStorage.getItem('role') == 'user'){
+  //         next({
+  //           path: '/dashboard',
+  //           params: { nextUrl: to.fullPath }
+  //         })
+
+  //       }else{
+  //        next();
+  //       }
+ 
+  // },
   },
   {
     path: '/register',
@@ -79,12 +93,20 @@ const routes = [
   {
     path: '/ingredients',
     name: 'Ingredients.index',
-    component: Ingredients
+    component: Ingredients,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
   },
   {
     path: '/meals',
     name: 'meals.index',
-    component: Meals
+    component: Meals,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
   },
   {
     path: '/order',
@@ -97,36 +119,62 @@ const routes = [
   {
   path: '/panel',
   name: 'Panel',
-  component: Panel
+  component: Panel,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },
+
   },
   {
     path: '/orders',
     name: 'Orders',
-    component: Orders
-    },
+    component: Orders,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
+  },
+    
     {
       path: '/ingredients/:IngId/edit',
       name: 'Ingredients.edit',
       component: IngredientsEdit,
-      props: true
+      props: true,
+      meta: {
+        requiresAuth: true,
+        permission: true
+      },  
   },
   {
     path: '/meals/:MealId/edit',
     name: 'meals.edit',
     component: MealsEdit,
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
 },
 {
   path: '/usersmanagement',
   name: 'UsersManagement',
   component: UsersManagement,
-  props: true
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
 },
 {
   path: '/usercreate',
   name: 'UserCreate',
   component: UserCreate,
-  props: true
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
 }
 ];
 
@@ -134,22 +182,30 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('jwt') == ('null' || null) ) {
+    console.log('tets');
+    if ((localStorage.getItem('jwt') == null) || (localStorage.getItem('jwt') == 'null')) {
       next({
         path: '/login',
         params: { nextUrl: to.fullPath }
       })
     } else {
-      let user = JSON.parse(localStorage.getItem('user'))
-      if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.is_admin == 1) {
-          next()
-        } else {
-          next({ name: 'userboard' })
+      if (to.matched.some(record => record.meta.permission)) {
+        console.log(localStorage.getItem('role'))
+        if(localStorage.getItem('role') != 'admin'){
+          next({
+            path: '/',
+            params: { nextUrl: to.fullPath }
+          })
+        }else{
+         next();
         }
       } else {
+
         next()
       }
     }
@@ -163,4 +219,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 export default router;

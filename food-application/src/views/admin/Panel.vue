@@ -45,6 +45,12 @@
         <p>Użytkownicy </p>
         </div>
     </div>
+    <div class="col-md-2">
+        <img @click="logout" src="../../../src/assets/mycollection/png/others/neko.png" class="img-fluid" alt="Responsive image">
+        <div class="text-center">
+        <p>Wyloguj się</p>
+        </div>
+    </div>   
 </div>
 </div>
 </div>
@@ -52,9 +58,36 @@
 
 <script>
 import AdminNav from '../../components/admin/AdminNav.vue'
+import {computed} from 'vue';
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 export default {
   components: { AdminNav },
-    name: 'Panel'
+    name: 'Panel',
+    methods: {
+  imgPush() {
+    return this.$router.push('/');
+  }
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const auth = computed(() => store.state.authenticated)
+
+    const logout = async () => {
+      await fetch('http://localhost:8000/api/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+      });
+      localStorage.setItem('jwt',null)
+      await router.push('/');
+    }
+    return {
+      auth,
+      logout
+    }
+  }
 }
 </script>
 

@@ -85,6 +85,7 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
       });
+      localStorage.getItem('jwt') == null;
       await router.push('/login');
     }
     return {
