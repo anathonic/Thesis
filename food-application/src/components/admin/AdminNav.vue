@@ -1,10 +1,10 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+<nav class="m-1 navbar navbar-expand-lg navbar-light bg-white border-bottom">
     <div class="container-fluid">
         <router-link to="/panel">
         <img src="../../../src/assets/mycollection/png/others/menu.png" class="img-fluid p-2 " alt="Responsive image">
         </router-link>
-        <div class="d-flex flex-column justify-content-center">
+        <div class="mess">
          <a class="navbar-brand ms-3" href="/panel">Admin Panel </a>
            <p>{{message}}</p>
            </div>
@@ -56,6 +56,11 @@ export default {
 </script>
 
 <style>
+
+.mess {
+  margin-top: 10px;
+  margin-left: 20px;
+}
 .container-fluid{
 font-family: 'DM Sans', sans-serif;
 }
