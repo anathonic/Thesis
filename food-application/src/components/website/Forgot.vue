@@ -15,9 +15,7 @@
      <div class="merge d-flex justify-content-center flex-column">
       <div class="text-center">
       <button style="width:120px;" class="mt-4 btn btn-light shadow-sm btn-block btn-lg mb-4">Resetuj</button>
-                   <div class="form-group">
-          <!-- <div v-if="message" class="alert alert-danger text-center mt-3" role="alert">{{message}}</div> -->
-        </div>
+    
            </div>
             </div>       
              </div>
@@ -29,35 +27,40 @@
 
 <script>
 import axios from 'axios'
-
 import Nav from './Nav.vue'
 export default {
 
     components: { Nav },
     name: 'Forgot',
     data(){
-        return {
+
+        return { 
             email: ''
         }
     },
     methods: {
+        
         async handleSubmit(){
-            const response = await axios.post('forgot',{
+ 
+            await axios.post('forgot',{
             email: this.email
-        }).then(
-            response => {
+            
+        }).catch( function(error){
+            
+            if(error.response){
                 
-                console.log(response);
+                alert(error.response.data.message);
+
             }
-        ).catch(
-            ress => {
-                
-                console.log(ress);
+
+
             }
         );
-        console.log(response);
+          
         }
+        
     }
+     
 }
 </script>
 
