@@ -31,6 +31,9 @@
                                     <option value="1">Dania główne</option>
                                     <option value="2">Przystawki</option>
                                     <option value="3">Napoje</option>
+                                    <option value="4">Zupy</option>
+                                    <option value="5">Zestawy</option>
+                                    <option value="6">Desery</option>
                                 </select>
                                 <label for="Status">Kategoria</label>
                             </div>

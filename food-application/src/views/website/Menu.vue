@@ -46,6 +46,42 @@
 </div>
     </tr>
   <hr class="line mb-3">
+      <h3>Zestawy</h3>
+        <hr class="line mb-3">
+    <tr 
+    v-for="meal in meals"
+    :key="meal.Id"
+    >
+    <div v-if="meal.CategoryName === 'Zestawy'">
+        <div class="d-flex justify-content-between">
+<div class="column">
+    <td >{{ meal.Name }}</td>
+</div>
+<div class="column">
+    <td >{{ meal.Price}}zł</td>
+</div>
+</div>
+    </div>
+    </tr>
+    <hr class="line mb-3">
+      <h3>Desery</h3>
+        <hr class="line mb-3">
+    <tr 
+    v-for="meal in meals"
+    :key="meal.Id"
+    >
+    <div v-if="meal.CategoryName === 'Desery'">
+        <div class="d-flex justify-content-between">
+<div class="column">
+    <td >{{ meal.Name }}</td>
+</div>
+<div class="column">
+    <td >{{ meal.Price}}zł</td>
+</div>
+</div>
+    </div>
+    </tr>
+  <hr class="line mb-3">
       <h3>Napoje</h3>
         <hr class="line mb-3">
     <tr 
@@ -103,8 +139,8 @@ export default {
 <style>
 
 .line {
-  width: 500px;
+  width: 40vw;
   margin: auto;
-  border: 2px solid black;
+  border: 0.2vw solid black;
 }
 </style>
