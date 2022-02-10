@@ -15,7 +15,7 @@
     :key="meal.Id"
     
     >
-    <div  v-if="meal.CategoryName === 'Przystawki'">
+    <div  v-if="meal.CategoryName === 'Przystawki' && meal.StatusName != 'Nieaktywny'">
       <div class="d-flex justify-content-between">
 <div class="column">
     <td >{{ meal.Name }}</td>
@@ -34,7 +34,7 @@
     v-for="meal in meals"
     :key="meal.Id"
     >
-    <div v-if="meal.CategoryName === 'Dania główne'">
+    <div v-if="meal.CategoryName === 'Dania główne' && meal.StatusName != 'Nieaktywny'">
       <div class="d-flex justify-content-between">
 <div class="column">
     <td >{{ meal.Name }}</td>
@@ -52,7 +52,25 @@
     v-for="meal in meals"
     :key="meal.Id"
     >
-    <div v-if="meal.CategoryName === 'Zestawy'">
+    <div v-if="meal.CategoryName === 'Zestawy' && meal.StatusName != 'Nieaktywny'">
+        <div class="d-flex justify-content-between">
+<div class="column">
+    <td >{{ meal.Name }}</td>
+</div>
+<div class="column">
+    <td >{{ meal.Price}}zł</td>
+</div>
+</div>
+    </div>
+    </tr>
+      <hr class="line mb-3">
+      <h3>Zupy</h3>
+        <hr class="line mb-3">
+    <tr 
+    v-for="meal in meals"
+    :key="meal.Id"
+    >
+    <div v-if="meal.CategoryName === 'Zupy' && meal.StatusName != 'Nieaktywny'">
         <div class="d-flex justify-content-between">
 <div class="column">
     <td >{{ meal.Name }}</td>
@@ -70,7 +88,7 @@
     v-for="meal in meals"
     :key="meal.Id"
     >
-    <div v-if="meal.CategoryName === 'Desery'">
+    <div v-if="meal.CategoryName === 'Desery' && meal.StatusName != 'Nieaktywny'">
         <div class="d-flex justify-content-between">
 <div class="column">
     <td >{{ meal.Name }}</td>
@@ -88,7 +106,7 @@
     v-for="meal in meals"
     :key="meal.Id"
     >
-    <div v-if="meal.CategoryName === 'Napoje'">
+    <div v-if="meal.CategoryName === 'Napoje' && meal.StatusName != 'Nieaktywny'">
         <div class="d-flex justify-content-between">
 <div class="column">
     <td >{{ meal.Name }}</td>

@@ -24,10 +24,10 @@
             <a class="nav-link active" aria-current="page" href="./">Strona główna</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./menu">Menu</a>
+            <a class="nav-link" href="./aboutus">O nas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./aboutus">O nas</a>
+            <a class="nav-link " href="./menu">Menu</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./contact">Kontakt</a>
