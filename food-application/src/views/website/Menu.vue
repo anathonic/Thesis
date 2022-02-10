@@ -1,7 +1,8 @@
 <template>
   <div id="menu">
       <Nav/>
-      <div class="m-5 text-center">
+      <div class="mt-4 text-center">
+       <img src="../../../src/assets/mycollection/png/others/onigiri.png" class="img-fluid" alt="Responsive image">
         <h1>Menu</h1>
       </div>
       <table class="d-flex flex-column align-items-center table">

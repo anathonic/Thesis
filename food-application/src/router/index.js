@@ -17,7 +17,8 @@ import MealsEdit from "../views/admin/MealsEdit.vue";
 import IngredientsEdit from "../views/admin/IngredientsEdit.vue";
 import UsersManagement from "../views/admin/UsersManagement.vue";
 import UserCreate from "../views/admin/UserCreate.vue";
-
+import Forgot from "../components/website/Forgot.vue"
+import Reset from "../components/website/Reset.vue"
 
 const routes = [
 
@@ -30,6 +31,16 @@ const routes = [
 
     }
 
+  },
+  {
+    path: '/forgot',
+    name: 'Forgot',
+    component: Forgot
+  },
+  {
+    path: '/reset/:token',
+    name: 'Reset',
+    component: Reset
   },
   {
     path: '/account',
