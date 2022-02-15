@@ -20,10 +20,12 @@
         </div>
     </div>
         <div class="col-md-2">
+          <button style="border: none; background: none;" @click="openModal">
 <img src="../../../src/assets/mycollection/png/others/shopping-basket-1.png" class="img-fluid" alt="Responsive image">
        <div class="text-center">
         <p>Koszyk</p>
         </div>
+          </button>
     </div>
     <div class="col-md-2">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
@@ -47,19 +49,44 @@
     </div>
 </div>
 </div>
+<basketModal :total-price="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
 </div>
 </template>
 
 <script>
+import basketModal from '../../components/website/basket-modal-component.vue'
+import Order from '../website/Order.vue'
 import UserNav from '../../components/user/UserNav.vue'
 import {computed} from 'vue';
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import {onMounted, ref} from 'vue';
 export default {
-  components: { UserNav },
+  components: { UserNav, basketModal},
     name: 'Dashboard',
+    data(){
+      return{
+        showModal: false,
+        totalPrice: Order.data().$store.state.totalPrice,
+        orderData: Order.data().$store.state.orderData,
+      }
+    },
   methods: {
+    openModal(){
+      this.showModal = true;
+    },
+    deleteThisRow(index, positionPrice){
+      this.orderData.splice(index, 1);
+      Order.data().$store.commit('decrement');
+      Order.data().$store.commit('delete', index);
+      //eslint-disable-next-line
+      Order.data().$store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
+      Order.data().$store.state.totalPrice = Number((Order.data().$store.state.totalPrice).toFixed(2));
+      this.totalPrice = Order.data().$store.state.totalPrice;
+    },
+    onChildClick(){
+      this.showModal = false;
+    },
   imgPush() {
     return this.$router.push('/');
   }

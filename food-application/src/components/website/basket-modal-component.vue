@@ -37,38 +37,50 @@
                     <span>Wartość: </span><span class="fw-bold">{{totalPrice}}</span><span class="fw-bold"> PLN</span>
                 </div>
             </div>
-            <div class="modal-body modal-body-2">
+            <div class="modal-body modal-body-2 needs-validation was-validated" novalidate="">
                 <div class="border border-info rounded p-3 mt-4">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputEmail">Email</label>
-                            <input v-model="email" type="email" class="form-control" id="inputEmail" placeholder="Podaj email">
+                            <input v-model="user_email" type="email" class="form-control" id="inputEmail" placeholder="Podaj email">
                         </div>
                         <div class="col">
                             <label for="inputPhoneNumber">Numer telefonu</label>
-                            <input v-model="phone" type="tel" class="form-control" id="inputPhoneNumber" placeholder="Podaj numer telefonu dla dostawcy">
+                            <input v-model="phone" type="tel" class="form-control" id="inputPhoneNumber" required="" placeholder="Podaj numer telefonu dla dostawcy">
+                            <div class="invalid-feedback">
+                                Nr. telefonu nie został wprowadzony.
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputName">Imię i naziwsko</label>
-                            <input v-model="userName" type="text" class="form-control" id="inputName" placeholder="Podaj imię oraz nazwisko">
+                            <input v-model="user_name" type="text" class="form-control" id="inputName" placeholder="Podaj imię oraz nazwisko">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputAdres">Adres</label>
-                            <input v-model="address" type="text" class="form-control" id="inputAdres" placeholder="Podaj ulicę oraz nr domu">
+                            <input v-model="address" type="text" class="form-control" id="inputAdres" required="" placeholder="Podaj ulicę oraz nr domu">
+                            <div class="invalid-feedback">
+                                Adres nie został wprowadzony.
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputPostal">Kod pocztowy</label>
-                            <input v-model="postal" type="text" class="form-control" id="inputPostal" placeholder="Podaj kod pocztowy">
+                            <input v-model="postal" type="text" class="form-control" id="inputPostal" required="" placeholder="Podaj kod pocztowy">
+                            <div class="invalid-feedback">
+                                Kod pocztowy nie został wprowadzony.
+                            </div>
                         </div>
                         <div class="col">
                             <label for="inputCity">Miejscowość</label>
-                            <input v-model="city" type="text" class="form-control" id="inputCity" placeholder="Podaj nazwę miejscowości">
+                            <input v-model="city" type="text" class="form-control" id="inputCity" required="" placeholder="Podaj nazwę miejscowości">
+                            <div class="invalid-feedback">
+                                Miejscowość nie została wprowadzona.
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -79,11 +91,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="bg-success border border-success rounded m-3" v-show="alert">
-                <p class="text-light text-center m-0 p-2">Dziękujemy! Twoje zamówienie zostało złożone.</p>
-            </div>
-
             <hr class="basketHr">
             <div class="modal-footer bg-light">
                 <button class="btn btn-info" @click="sendOrder">Zamów</button>
@@ -93,6 +100,8 @@
 </template>
 <script>
 import axios from 'axios'
+import {onMounted, ref} from 'vue';
+import {useStore} from "vuex";
   export default {
     name: 'basketModal',
     props: {
@@ -107,43 +116,44 @@ import axios from 'axios'
     },
     data(){
         return {
-            email: '',
             phone: '',
-            userName: '',
             address: '',
             postal: '',
             city: '',
-            alert: false,
         }
     },
     methods: {
+        //Metoda filtrująca dane zamówienia w celu usunięcia duplikatów i określenia ilości tych samych dań w zamówieniu
+        MealsQuantityById() {
+        var filtered = {}
+        for (let i in this.orderData) {
+            let key = this.orderData[i].MealId
+            filtered[key] = {
+            MealId: key,
+            Quantity: filtered[key] && filtered[key].Quantity ? filtered[key].Quantity + 1 : 1
+            }
+        }
+        return Object.values(filtered)
+        },
         closeModal() {
             this.$emit('clicked');
         },
-        showAlert() {
-            this.alert = true;
-            setTimeout( () => this.alert = false, 5000);
-            setTimeout( () => this.$router.push({ path: '/'}), 6500);
-        },
         sendOrder() {
-            let currentDate = new Date(Date.now());
-            //obcięcie znaczników strefy czasowej z formatu daty żeby format zgadzał się z DB
-            let startDate = new Date(currentDate).toJSON().slice(0, 19).replace('T', ' ');
-            //opóźnienie by pokazać róznice w dacie zamówienia oraz dacie finalizacji zamówienia (ze względu na to że enddate w DB not null)
-            let endDate = new Date(currentDate.getTime() + 30 * 60000).toJSON().slice(0, 19).replace('T', ' ');
-
-            axios.post('order?OrderNo='+this.stringGen()+'&User='+this.email+'&Phone='+this.phone+'&Name='+this.userName+'&Address='+this.address+
-            '&Postal='+this.postal+'&City='+this.city+'&Details='+JSON.stringify(this.orderData)+'&OrderPrice='+this.totalPrice+
-            '&OrderDate='+startDate+'&EndDate='+endDate+'').then(response => {
+            axios.post('order', {
+                OrderPrice: this.totalPrice,
+                UserId: this.user_id,
+                meals: this.MealsQuantityById()
+            }).then(response => {
                 if(response.status >= 200 && response.status < 300){
                     console.log(response.data);
                     console.log("success");
-                    this.showAlert();
                 }
                 console.log(response.data);
             })
         },
-        stringGen(){
+
+        //Stara metoda do numerowania zamówień online
+        /*stringGen(){
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var x = 8;
@@ -151,8 +161,40 @@ import axios from 'axios'
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
 
             return text;
-        },
+        },*/
     },
+
+      setup() {
+        const message = ref('You are not logged in!');
+        const store = useStore();
+        const user_name = ref();
+        const user_id = ref();
+        const user_email = ref();
+    
+    onMounted(async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/user', {
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include'
+        });
+        const content = await response.json();
+        message.value = `Zalogowano pomyślnie!`;
+        user_name.value = `${content.name} `;
+        user_id.value = `${content.id} `;
+        user_email.value = `${content.email} `;
+        await store.dispatch('setAuth', true);
+      } catch (e) {
+        await store.dispatch('setAuth', false);
+      }
+    });
+
+    return {
+      message,
+      user_name,
+      user_id,
+      user_email,
+    }
+  }
   };
 </script>
 <style scoped>

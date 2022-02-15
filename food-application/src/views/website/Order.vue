@@ -40,7 +40,7 @@
                         <td class="pt-3">{{ meal.Description }}</td>
                         <td class="pt-3" style="currency">{{ meal.Price }}<span> PLN</span></td>
                         <td>
-                            <button class="button-add-to-basket" @click="addToBasket(meal.Name, meal.Price)">
+                            <button class="button-add-to-basket" @click="addToBasket(meal.Name, meal.Price, meal.MealId)">
                                 <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
                             </button>
                         </td>
@@ -74,10 +74,11 @@ const $store = new Vuex.Store({
     decrement (state) {
         state.productsAmount--
     },
-    add (state, {Name: MealName, Price: MealPrice}) {
+    add (state, {Name: MealName, Price: MealPrice, MealId: MealId}) {
         state.orderData.push({
             Name: MealName,
-            Price: MealPrice
+            Price: MealPrice,
+            MealId: MealId
         })
     },
     delete (state, index) {
@@ -100,15 +101,15 @@ export default {
     },
     methods: {
         getMeals() {
-            axios.get('meals').then(response => {
+            axios.get('menu/category/0').then(response => {
                 if(response.status >= 200 && response.status < 300){
                     this.meals = response.data.data
                 }
                 console.log(response.data);
             })
         },
-        addToBasket(MealName, MealPrice) {
-            $store.commit('add', {Name: MealName, Price: MealPrice});
+        addToBasket(MealName, MealPrice, MealId) {
+            $store.commit('add', {Name: MealName, Price: MealPrice, MealId: MealId});
             //eslint-disable-next-line
             $store.state.totalPrice += parseFloat(MealPrice.replace(/[^\d\.]/g, ""));
             $store.state.totalPrice = Number(($store.state.totalPrice).toFixed(2));
