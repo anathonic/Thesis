@@ -20,6 +20,9 @@
           <div v-if="message" class="alert alert-danger text-center mt-3" role="alert">{{message}}</div>
         </div>
     <p class="mt-2">Nie masz jeszcze konta? <a style="color: #000000;" href="./register">Zarejestruj się</a>.</p>
+     <div class="text-end">
+    <p style="font-size: 14px;">Zapomniałeś hasła? <a style="color: #000000;" href="./forgot">Zresetuj hasło</a>.</p>
+          </div>
               <div class="merge d-flex justify-content-center flex-column">
       <button class="btn btn-light shadow-sm btn-block btn-lg mb-4">Zaloguj się</button>
             </div>
@@ -56,20 +59,26 @@ export default {
         body: JSON.stringify(data)
       }).then(async response => {
       const data = await response.json();
+      message.value = data.message; 
+      let name = data.role[0].name;
       localStorage.setItem('user',JSON.stringify(data.user))
       localStorage.setItem('jwt',data.token)
-      console.log(data.token);
-      console.log(data.role)
+      localStorage.setItem('role',data.role[0].name)
       if (!response.ok) {
         const error = (data && data.message) || response.statusText;
          message.value = error;
+         console.log(data.message);
         return Promise.reject(error);
+        
       }
-             if (localStorage.getItem('jwt') != null) {
+            if (localStorage.getItem('jwt') != null) {
+              if(name == 'admin'){
+                router.push('/panel')
+              }else{
+                router.push('/dashboard')
+              }
             
-                router.push('dashboard')
-            
-             }
+           }
       
     });
 

@@ -96,6 +96,7 @@ export default {
     const router = useRouter();
     const message = ref('Nie jesteś zalogowany!');
     const auth = computed(() => store.state.authenticated)
+    
     onMounted(async () =>{
       try {
         const respone = await fetch('http://localhost:8000/api/user',{
@@ -115,7 +116,8 @@ export default {
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
       });
-      localStorage.setItem('jwt',null)
+      localStorage.setItem('jwt', null)
+      localStorage.setItem('role', null)
       await router.push('/');
     }
     return {

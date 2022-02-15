@@ -2,7 +2,7 @@
 <div id="account">
   <User-nav/>
             <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="mt-5 col-md-3 col-sm-6 col-xs-12">
                     <div class="account">
                         <div class="text-center">
                          <img src="../../../src/assets/mycollection/png/others/avatar.png" class="img-fluid" alt="Responsive image">
@@ -14,7 +14,7 @@
     </div>
                     </div>
                 </div>
-            <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="mt-5 col-md-5 col-sm-6 col-xs-12">
                 <h1 class="text-center">Zamówienia</h1>
                                 <div class="feature-content d-flex align-items-center">
                                     <div class="text-center m-3">
