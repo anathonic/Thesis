@@ -101,7 +101,7 @@ export default {
       try {
         const respone = await fetch('http://localhost:8000/api/user',{
           headers: {'Content-Type': 'application/json'},
-          credentials: 'include'
+          credentials: 'include',
         });
         const content =await respone.json();
         message.value = `Cześć ${content.name}!`;

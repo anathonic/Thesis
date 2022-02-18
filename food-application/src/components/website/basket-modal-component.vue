@@ -149,6 +149,7 @@ import {useStore} from "vuex";
                     console.log("success");
                 }
                 console.log(response.data);
+                
             })
         },
 
@@ -173,7 +174,7 @@ import {useStore} from "vuex";
     
     onMounted(async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', {
+        const response = await fetch('http://localhost:8000/api/user', {
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });

@@ -19,7 +19,7 @@ import UsersManagement from "../views/admin/UsersManagement.vue";
 import UserCreate from "../views/admin/UserCreate.vue";
 import Forgot from "../components/website/Forgot.vue"
 import Reset from "../components/website/Reset.vue"
-
+import UsersEdit from "../views/admin/UsersEdit.vue"
 const routes = [
 
   {
@@ -173,6 +173,16 @@ const routes = [
       requiresAuth: true,
       permission: true
     },  
+},
+{
+  path: '/users/:UserId/edit',
+  name: 'Users.edit',
+  component: UsersEdit,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
 },
 {
   path: '/usersmanagement',

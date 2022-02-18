@@ -52,11 +52,9 @@ export default {
                 alert(error.response.data.message);
 
             }
-
-
             }
         );
-          
+         alert('Sprawdź swoją skrzynkę e-mail!');
         }
         
     }

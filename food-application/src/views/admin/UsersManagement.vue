@@ -32,10 +32,11 @@
      <td class="pt-3">{{ user.role[0].name }}</td>
      <td class="pt-3">{{ user.created_at.split("").slice(0, 10).join("") }}</td>
      <td>
-     <img src="../../../src/assets/mycollection/png/others/edit.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw">
+     <img src="../../../src/assets/mycollection/png/others/edit.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw"
+      v-on:click="() => $router.push({name: 'Users.edit', params: {UserId: user.id}})">
      </td>
      <td>
-     <img src="../../../src/assets/mycollection/png/others/trash.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw">
+     <img v-on:click="deleteUser(user.id)" src="../../../src/assets/mycollection/png/others/trash.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw">
 
      </td>
      </tr>
@@ -47,33 +48,48 @@
 </template>
 
 <script>
-import axios from 'axios'
 
+import { onMounted, reactive } from "vue";
+import useUsers from "../../composables/Users.js";
 import AdminNav from '../../components/admin/AdminNav.vue'
 export default {
   components: { AdminNav },
-data () {
-         return {
-             users: [],
-             
-             url: window.location.origin
-         }
-     },
-     
-     methods: {
-         getUsers() {
-             axios.get('users').then(response => {
-                 if(response.status >= 200 && response.status < 300){
-                     this.users = response.data.data
-                 }
-                 console.log(response.data);    
-             })
-         },
-     },
-     mounted () {
-        this.user_created,
-         this.getUsers()
-         }
+         setup() {
+            const { user, users, getUsers, storeUsers, destroyUser, errors } = useUsers()
+
+            onMounted(getUsers)
+            const form = reactive({
+                Name: '',
+            })
+            const saveUsers = async () => {
+                await storeUsers({...form});
+                await getUsers();
+            }
+
+
+ 
+
+            const deleteUser = async (UserId) => {
+                if(!window.confirm('Czy napewno usunąć ten składnik?')){
+                    return
+                }
+
+                await destroyUser(UserId);
+                await getUsers();
+            }
+
+            onMounted(getUsers)
+
+            return {
+
+                deleteUser,
+                saveUsers,
+                form,
+                errors,
+                users,
+                user,
+            }
+        }
      }
 </script>
 
