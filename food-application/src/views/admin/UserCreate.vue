@@ -59,7 +59,7 @@ export default {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       });
-       await router.push('/login');
+       await router.push('/usersmanagement');
     }
 
     return {
