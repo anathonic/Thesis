@@ -1,7 +1,7 @@
 <template>
 <div id="account">
   <User-nav/>
-            <div class="row d-flex justify-content-center mt-5">
+            <div class="row d-flex justify-content-center mt-5" id="dashstyle">
                 <div class="mt-5 col-md-3 col-sm-6 col-xs-12">
                     <div class="account">
                         <div class="text-center">

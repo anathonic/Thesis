@@ -1,5 +1,6 @@
 
 <template>
+<div id="userwrapper">
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" id="navbar">
     <div class="container-fluid">
            <router-link to="/">
@@ -28,7 +29,7 @@
                 <li class="nav-item active"><a class="nav-link" href="/dashboard">Panel główny</a></li>
                  <li class="nav-item active"><a class="nav-link" href="/account">Konto</a></li>
                   <li class="nav-item active"><a class="nav-link" href="/order">Zamów online</a></li>
-                   <li class="nav-item active"><a class="nav-link" href="/cart">Koszyk</a></li>
+                   <li class="nav-item active"><a class="nav-link" @click="openModal" style="cursor: pointer">Koszyk</a></li>
                     <li class="nav-item active"><a class="nav-link" href="/orders">Twoje zamówienia</a></li>
                      <li class="nav-item active"><a class="nav-link" href="/settings">Ustawienia</a></li>
                    <li class="nav-item active"><p @click="logout"  class="nav-link"  href=""> Wyloguj</p></li>
@@ -37,19 +38,51 @@
       </div>
     </div>
   </nav>
+  <basketModal :totalPrice="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
+</div>
 </template>
 <script>
+import basketModal from '../website/basket-modal-component.vue'
+import Order from '../../views/website/Order.vue'
 import {computed} from 'vue';
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import {onMounted, ref} from 'vue';
 
 export default {
+  components: {basketModal},
+  data(){
+    return{
+      showModal: false,
+      totalPrice: Order.data().$store.state.totalPrice,
+      orderData: Order.data().$store.state.orderData,
+    }
+  },
   name: "Nav",
   methods: {
   imgPush() {
     return this.$router.push('/');
-  }
+  },
+  openModal(){
+    this.showModal = true;
+    this.totalPrice = Order.data().$store.state.totalPrice;
+    document.getElementById("navbar").style.filter = "blur(2px) grayscale(1)";
+    document.getElementById("dashstyle").style.filter = "blur(2px) grayscale(1)";
+  },
+  deleteThisRow(index, positionPrice){
+    //eslint-disable-next-line
+    Order.data().$store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
+    Order.data().$store.state.totalPrice = Number((Order.data().$store.state.totalPrice).toFixed(2));
+    this.orderData.splice(index, 1);
+    Order.data().$store.commit('decrement');
+    Order.data().$store.commit('delete', index);
+    this.totalPrice = Order.data().$store.state.totalPrice;
+    },
+  onChildClick(){
+    this.showModal = false;
+    document.getElementById("navbar").style.filter = "none";
+    document.getElementById("dashstyle").style.filter = "none";
+  },
   },
   setup() {
     const store = useStore();

@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" v-if="showModal">
+    <div class="modal" id="modal" v-if="showModal">
         <div v-if="showModal" class="modal-content">
             <div class="modal-header bg-light">
                 <slot name="header"><h4>Twoje zamówienie</h4></slot>
@@ -34,7 +34,7 @@
                         </tr>
                     </tbody>
                     </table>
-                    <span>Wartość: </span><span class="fw-bold">{{totalPrice}}</span><span class="fw-bold"> PLN</span>
+                    <span>Wartość: </span><span class="fw-bold">{{this.totalPrice}}</span><span class="fw-bold"> PLN</span>
                 </div>
             </div>
             <div class="modal-body modal-body-2 needs-validation was-validated" novalidate="">
@@ -99,7 +99,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
 import {onMounted, ref} from 'vue';
 import {useStore} from "vuex";
   export default {
@@ -110,16 +110,14 @@ import {useStore} from "vuex";
             type: Array,
             default: () => { return []; }
         },
-        totalPrice: {
-            default: () => { return; }
-        }
+        totalPrice: {default: () => {return this.totalPrice}}
     },
     data(){
         return {
             phone: '',
             address: '',
             postal: '',
-            city: '',
+            city: ''
         }
     },
     methods: {

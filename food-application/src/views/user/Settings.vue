@@ -1,7 +1,7 @@
 <template>
 <div id="setting">
 <User-nav/>
-    <div class="container mt-0">
+    <div class="container mt-0" id="dashstyle">
       <div class="row">
         <div class="col-md-8 order-md-1">
           <h2 class="text-center mb-3">Ustawienia</h2>

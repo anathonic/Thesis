@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <basketModal :total-price="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
+    <basketModal :totalPrice="$store.state.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
 </div>
 </div>
 </template>
@@ -61,7 +61,11 @@ import basketModal from '../../components/website/basket-modal-component.vue';
 import axios from 'axios'
 import UserNav from '../../components/user/UserNav.vue';
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 const $store = new Vuex.Store({
+        plugins: [createPersistedState({
+        storage: window.sessionStorage,
+    })],
   state: {
     productsAmount: 0,
     orderData: [],
@@ -82,7 +86,7 @@ const $store = new Vuex.Store({
         })
     },
     delete (state, index) {
-        state.orderData.splice(index, 0)
+        state.orderData.splice(index, 0);
     }
   }
 })
@@ -96,7 +100,6 @@ export default {
             showModal: false,
             orderData: [],
             $store: $store,
-            totalPrice: 0.00
         }
     },
     methods: {
@@ -113,24 +116,21 @@ export default {
             //eslint-disable-next-line
             $store.state.totalPrice += parseFloat(MealPrice.replace(/[^\d\.]/g, ""));
             $store.state.totalPrice = Number(($store.state.totalPrice).toFixed(2));
-            this.totalPrice = $store.state.totalPrice;
             $store.commit('increment');
         },
         deleteThisRow(index, positionPrice) {
-            this.orderData.splice(index, 1);
-            $store.commit('decrement');
-            $store.commit('delete', index);
             //eslint-disable-next-line
             $store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
             $store.state.totalPrice = Number(($store.state.totalPrice).toFixed(2));
-            this.totalPrice = $store.state.totalPrice;
+            this.orderData.splice(index, 1);
+            $store.commit('decrement');
+            $store.commit('delete', index);
         },
         openModal() {
             this.showModal = true;
-            document.getElementById("Order").style.filter = "blur(2px)";
-            document.getElementById("navbar").style.filter = "blur(2px)";
+            document.getElementById("Order").style.filter = "blur(2px) grayscale(1)";
+            document.getElementById("navbar").style.filter = "blur(2px) grayscale(1)";
             this.orderData = $store.state.orderData;
-            this.totalPrice = $store.state.totalPrice;
             console.log($store.state.orderData)
         },
         onChildClick () {

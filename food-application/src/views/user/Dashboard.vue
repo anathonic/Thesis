@@ -1,7 +1,7 @@
 <template>
 <div id="dashboard">
     <User-nav/>
-    <div class="grid-container mt-5">
+    <div class="grid-container mt-5" id="dashstyle">
     <div class="row">
     <div class="col-md-2">
         <router-link to="/account">
@@ -49,7 +49,7 @@
     </div>
 </div>
 </div>
-<basketModal :total-price="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
+<basketModal :totalPrice="this.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
 </div>
 </template>
 
@@ -72,21 +72,25 @@ export default {
       }
     },
   methods: {
-    openModal(){
-      this.showModal = true;
+  openModal(){
+    this.showModal = true;
+    document.getElementById("dashstyle").style.filter = "blur(2px) grayscale(1)";
+    document.getElementById("userwrapper").style.filter = "blur(2px) grayscale(1)";
+  },
+  deleteThisRow(index, positionPrice){
+    //eslint-disable-next-line
+    Order.data().$store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
+    Order.data().$store.state.totalPrice = Number((Order.data().$store.state.totalPrice).toFixed(2));
+    this.orderData.splice(index, 1);
+    Order.data().$store.commit('decrement');
+    Order.data().$store.commit('delete', index);
+    this.totalPrice = Order.data().$store.state.totalPrice;
     },
-    deleteThisRow(index, positionPrice){
-      this.orderData.splice(index, 1);
-      Order.data().$store.commit('decrement');
-      Order.data().$store.commit('delete', index);
-      //eslint-disable-next-line
-      Order.data().$store.state.totalPrice -= parseFloat(positionPrice.replace(/[^\d\.]/g, ""));
-      Order.data().$store.state.totalPrice = Number((Order.data().$store.state.totalPrice).toFixed(2));
-      this.totalPrice = Order.data().$store.state.totalPrice;
-    },
-    onChildClick(){
-      this.showModal = false;
-    },
+  onChildClick(){
+    this.showModal = false;
+    document.getElementById("dashstyle").style.filter = "none";
+    document.getElementById("userwrapper").style.filter = "none";
+  },
   imgPush() {
     return this.$router.push('/');
   }
