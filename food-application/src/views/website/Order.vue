@@ -3,7 +3,7 @@
 <User-nav/>
 <div class="container-fluid px-5 my-5">
     <div class="container" id="Order">
-        <div class="order-container">
+        <div class="order-container" id="dashstyle">
             <br>
             <div class="panel-heading">
                 <div class="order-row">
@@ -128,15 +128,15 @@ export default {
         },
         openModal() {
             this.showModal = true;
-            document.getElementById("Order").style.filter = "blur(2px) grayscale(1)";
-            document.getElementById("navbar").style.filter = "blur(2px) grayscale(1)";
+                document.getElementById("Order").style.filter = "blur(2px) grayscale(1)";
+                document.getElementById("navbar").style.filter = "blur(2px) grayscale(1)";
             this.orderData = $store.state.orderData;
             console.log($store.state.orderData)
         },
         onChildClick () {
             this.showModal = false;
-            document.getElementById("Order").style.filter = "none";
-            document.getElementById("navbar").style.filter = "none";
+                document.getElementById("Order").style.filter = "none";
+                document.getElementById("navbar").style.filter = "none";
         },
     },
     mounted () {
