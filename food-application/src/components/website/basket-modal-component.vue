@@ -46,7 +46,7 @@
                         </div>
                         <div class="col">
                             <label for="inputPhoneNumber">Numer telefonu</label>
-                            <input v-model="phone" type="tel" class="form-control" id="inputPhoneNumber" required="" placeholder="Podaj numer telefonu dla dostawcy">
+                            <input v-model="user_phone" type="tel" class="form-control" id="inputPhoneNumber" required="" placeholder="Podaj numer telefonu dla dostawcy">
                             <div class="invalid-feedback">
                                 Nr. telefonu nie został wprowadzony.
                             </div>
@@ -61,7 +61,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputAdres">Adres</label>
-                            <input v-model="address" type="text" class="form-control" id="inputAdres" required="" placeholder="Podaj ulicę oraz nr domu">
+                            <input v-model="user_address" type="text" class="form-control" id="inputAdres" required="" placeholder="Podaj ulicę oraz nr domu">
                             <div class="invalid-feedback">
                                 Adres nie został wprowadzony.
                             </div>
@@ -70,14 +70,14 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputPostal">Kod pocztowy</label>
-                            <input v-model="postal" type="text" class="form-control" id="inputPostal" required="" placeholder="Podaj kod pocztowy">
+                            <input v-model="user_postalCode" type="text" class="form-control" id="inputPostal" required="" placeholder="Podaj kod pocztowy">
                             <div class="invalid-feedback">
                                 Kod pocztowy nie został wprowadzony.
                             </div>
                         </div>
                         <div class="col">
                             <label for="inputCity">Miejscowość</label>
-                            <input v-model="city" type="text" class="form-control" id="inputCity" required="" placeholder="Podaj nazwę miejscowości">
+                            <input v-model="user_city" type="text" class="form-control" id="inputCity" required="" placeholder="Podaj nazwę miejscowości">
                             <div class="invalid-feedback">
                                 Miejscowość nie została wprowadzona.
                             </div>
@@ -113,14 +113,17 @@ import {useStore} from "vuex";
         totalPrice: {default: () => {return this.totalPrice}}
     },
     data(){
-        return {
-            phone: '',
-            address: '',
-            postal: '',
-            city: ''
-        }
+        return {}
     },
     methods: {
+        //getAddress() {
+        //    axios.get('http://127.0.0.1:8000/api/address/'+this.user_id).then(response => {
+         //       if(response.status >= 200 && response.status < 300){
+           //         this.addresses = response.data.data
+             //   }
+            //    console.log(response.data);
+           // })
+        //},
         //Metoda filtrująca dane zamówienia w celu usunięcia duplikatów i określenia ilości tych samych dań w zamówieniu
         MealsQuantityById() {
         var filtered = {}
@@ -135,6 +138,7 @@ import {useStore} from "vuex";
         },
         closeModal() {
             this.$emit('clicked');
+            
         },
         sendOrder() {
             axios.post('order', {
@@ -147,7 +151,18 @@ import {useStore} from "vuex";
                     console.log("success");
                 }
                 console.log(response.data);
-                
+            })
+            axios.post('update/address/' + this.user_id, {
+                Address: this.user_address,
+                PostalCode: this.user_postalCode,
+                City: this.user_city,
+                PhoneNumber: this.user_phone,
+            }).then(response => {
+                if(response.status >= 200 && response.status < 300){
+                    console.log(response.data);
+                    console.log("success");
+                }
+                console.log(response.data);
             })
         },
 
@@ -162,17 +177,20 @@ import {useStore} from "vuex";
             return text;
         },*/
     },
-
       setup() {
         const message = ref('You are not logged in!');
         const store = useStore();
         const user_name = ref();
         const user_id = ref();
         const user_email = ref();
+        const user_address = ref();
+        const user_postalCode = ref();
+        const user_city = ref();
+        const user_phone = ref();
     
     onMounted(async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/user', {
+        const response = await fetch('http://127.0.0.1:8000/api/user', {
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });
@@ -182,6 +200,16 @@ import {useStore} from "vuex";
         user_id.value = `${content.id} `;
         user_email.value = `${content.email} `;
         await store.dispatch('setAuth', true);
+
+        const responseAddresses = await fetch('http://127.0.0.1:8000/api/address/' + user_id.value, {
+        headers: {'Content-Type': 'application/json'}
+        });
+        const contentAddresses = await responseAddresses.json();
+        const cont = await Object(contentAddresses.data[0]);
+        user_address.value = `${cont.Address} `;
+        user_postalCode.value = `${cont.PostalCode} `;
+        user_city.value = `${cont.City} `;
+        user_phone.value = `${cont.PhoneNumber} `;
       } catch (e) {
         await store.dispatch('setAuth', false);
       }
@@ -192,6 +220,10 @@ import {useStore} from "vuex";
       user_name,
       user_id,
       user_email,
+      user_address,
+      user_postalCode,
+      user_city,
+      user_phone,
     }
   }
   };
