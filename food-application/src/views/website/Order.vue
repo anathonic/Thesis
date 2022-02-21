@@ -24,6 +24,9 @@
                 <div class="table-responsive">
                     <table class="table">
                     <thead>
+                        <tr><th scope="col">Dania Główne</th></tr>
+                    </thead>
+                    <thead style=" border: none">
                         <tr>
                         <th scope="col">Danie</th>
                         <th scope="col">Opis</th>
@@ -31,16 +34,36 @@
                         <th scope="col">Dodaj</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr
-                        v-for="meal in meals"
-                        :key="meal.MealId"
-                        >
+                    <tbody v-for="meal in meals" :key="meal.MealId" >
+                        <tr v-if="meal.Status != '0'">
                         <td class="pt-3">{{ meal.Name }}</td>
                         <td class="pt-3">{{ meal.Description }}</td>
                         <td class="pt-3" style="currency">{{ meal.Price }}<span> PLN</span></td>
                         <td>
                             <button class="button-add-to-basket" @click="addToBasket(meal.Name, meal.Price, meal.MealId)">
+                                <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
+                            </button>
+                        </td>
+                        </tr>
+                    </tbody>
+                    <thead style="border-top: 2px solid currentColor">
+                        <tr><th scope="col">Napoje</th></tr>
+                    </thead>
+                    <thead style="border: none">
+                        <tr>
+                        <th scope="col">Napój</th>
+                        <th scope="col">Opis</th>
+                        <th scope="col">Cena</th>
+                        <th scope="col">Dodaj</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="drink in drinks" :key="drink.MealId" >
+                        <tr v-if="drink.Status != '0'">
+                        <td class="pt-3">{{ drink.Name }}</td>
+                        <td class="pt-3">{{ drink.Description }}</td>
+                        <td class="pt-3" style="currency">{{ drink.Price }}<span> PLN</span></td>
+                        <td>
+                            <button class="button-add-to-basket" @click="addToBasket(drink.Name, drink.Price, drink.MealId)">
                                 <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
                             </button>
                         </td>
@@ -96,6 +119,7 @@ export default {
     data () {
         return {
             meals: [],
+            drinks: [],
             url: window.location.origin,
             showModal: false,
             orderData: [],
@@ -107,6 +131,12 @@ export default {
             axios.get('menu/category/0').then(response => {
                 if(response.status >= 200 && response.status < 300){
                     this.meals = response.data.data
+                }
+                console.log(response.data);
+            })
+            axios.get('menu/category/1').then(response => {
+                if(response.status >= 200 && response.status < 300){
+                    this.drinks = response.data.data
                 }
                 console.log(response.data);
             })
@@ -146,6 +176,15 @@ export default {
 </script>
 
 <style scoped>
+.table:first-child {
+    border-top: 2px solid currentColor;
+}
+.table>:not(:first-child) {
+    border-top: 1px solid currentColor;
+}
+.table>thead {
+    border-bottom: 2px solid currentColor;
+}
 .order-container{
     width: 100%;
 }

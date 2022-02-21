@@ -153,6 +153,12 @@ components: { UserNav, basketModal},
     border-radius: 14px;
     margin: 5vw;
     color: black;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.col-md-2:hover{
+  opacity: 100%;
 }
 
 .col-md-2 img{

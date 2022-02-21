@@ -20,6 +20,7 @@ import UserCreate from "../views/admin/UserCreate.vue";
 import Forgot from "../components/website/Forgot.vue"
 import Reset from "../components/website/Reset.vue"
 import UsersEdit from "../views/admin/UsersEdit.vue"
+import Payments from "../views/user/Payments.vue"
 const routes = [
 
   {
@@ -203,7 +204,15 @@ const routes = [
     requiresAuth: true,
     permission: true
   },  
-}
+},
+{
+  path: '/payments',
+  name: 'Payments',
+  component: Payments,
+  meta: {
+    requiresAuth: true,
+  },  
+},
 ];
 
 const router = createRouter({

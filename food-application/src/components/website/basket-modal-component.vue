@@ -194,6 +194,7 @@ import {useStore} from "vuex";
                 console.log(response.data);
             })
             }
+            this.$router.push('/payments');
         },
 
         //Stara metoda do numerowania zamówień online
