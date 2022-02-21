@@ -27,7 +27,7 @@
                         <td class="pt-3">{{ order.Name }}</td>
                         <td class="pt-3">{{ order.Price }} PLN</td>
                         <td>
-                            <button class="button-remove-from-basket" @click="$emit('delete-row', index, order.Price)">
+                            <button class="button-remove-from-basket" @click="dialogShow(index, order.Price)">
                                 <img src="../../../src/assets/mycollection/png/others/remove.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
                             </button>
                         </td>
@@ -42,7 +42,10 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputEmail">Email</label>
-                            <input v-model="user_email" type="email" class="form-control" id="inputEmail" placeholder="Podaj email">
+                            <input v-model="user_email" type="email" class="form-control" id="inputEmail" required="" placeholder="Podaj email">
+                            <div class="invalid-feedback">
+                                Email nie został wprowadzony.
+                            </div>
                         </div>
                         <div class="col">
                             <label for="inputPhoneNumber">Numer telefonu</label>
@@ -55,7 +58,10 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="inputName">Imię i naziwsko</label>
-                            <input v-model="user_name" type="text" class="form-control" id="inputName" placeholder="Podaj imię oraz nazwisko">
+                            <input v-model="user_name" type="text" class="form-control" id="inputName" required="" placeholder="Podaj imię oraz nazwisko">
+                            <div class="invalid-feedback">
+                                Imię nie zostało wporwadzone.
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -92,10 +98,29 @@
                 </div>
             </div>
             <hr class="basketHr">
+                <div id="errorAlert" style="display: none" class="alert alert-danger" role="alert">Wypełnij poprawnie wszystkie pola.</div>
             <div class="modal-footer bg-light">
                 <button class="btn btn-info" @click="sendOrder">Zamów</button>
             </div>
         </div>
+<!-- Modal Delete Dialog -->
+        <div class="modal-background" id="modalDialog" tabindex="-1" role="dialog" v-if="deleteDialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuń produkt</h5>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 0px">Czy na pewno chcesz usunąć produkt z koszyka?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" @click="$emit('delete-row', this.deleteIndex, this.deletePrice), this.deleteDialog=false">Tak</button>
+                <button type="button" class="btn btn-danger" @click="dialogHide">Nie</button>
+            </div>
+            </div>
+        </div>
+        </div>
+<!-- Modal Delete Dialog -->
     </div>
 </template>
 <script>
@@ -113,18 +138,19 @@ import {useStore} from "vuex";
         totalPrice: {default: () => {return this.totalPrice}}
     },
     data(){
-        return {}
+        return {
+            deleteDialog: false,
+            deleteIndex: "",
+            deletePrice: "",
+        }
     },
     methods: {
-        //getAddress() {
-        //    axios.get('http://127.0.0.1:8000/api/address/'+this.user_id).then(response => {
-         //       if(response.status >= 200 && response.status < 300){
-           //         this.addresses = response.data.data
-             //   }
-            //    console.log(response.data);
-           // })
-        //},
-        //Metoda filtrująca dane zamówienia w celu usunięcia duplikatów i określenia ilości tych samych dań w zamówieniu
+        dialogShow(index, price){
+            this.deleteIndex = index;
+            this.deletePrice = price;
+            this.deleteDialog=true;
+            },
+        dialogHide(){this.deleteDialog=false;},
         MealsQuantityById() {
         var filtered = {}
         for (let i in this.orderData) {
@@ -138,9 +164,12 @@ import {useStore} from "vuex";
         },
         closeModal() {
             this.$emit('clicked');
-            
         },
         sendOrder() {
+            if(this.user_address == "" || this.user_postalCode == "" || this.user_city == "" ||
+            this.user_phone == "" || this.user_name == "" || this.user_email == ""){
+                document.getElementById("errorAlert").style = "display: block";
+            }else{
             axios.post('order', {
                 OrderPrice: this.totalPrice,
                 UserId: this.user_id,
@@ -164,6 +193,7 @@ import {useStore} from "vuex";
                 }
                 console.log(response.data);
             })
+            }
         },
 
         //Stara metoda do numerowania zamówień online
@@ -250,5 +280,14 @@ import {useStore} from "vuex";
     .button-remove-from-basket{
         all: unset;
         cursor: pointer;
+    }
+    .modal-background{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: transparent;
+    }
+    .modal-dialog{
+        margin-top: 30%!important;
     }
 </style>
