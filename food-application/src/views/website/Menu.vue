@@ -12,7 +12,7 @@
     >
       <table class="table table-sm">
       <thead>    
-      <tr>
+      <tr v-if="category.Stat === 1 ">
        <th scope="col"  style="font-size: 14px; font-weight: bold;">{{category.Name}}</th>             
        </tr>
        </thead>
@@ -21,7 +21,7 @@
     v-for="meal in meals"
     :key="meal.CategoryName"
     >
-       <td v-if="meal.Category == category.id && meal.StatusName === 'Aktywny'"> 
+       <td v-if="meal.Category == category.id && meal.StatusName === 'Aktywny' && category.Stat === 1 "> 
       <div style="font-size: 1.2vw; font-weight: bold;">
        {{ meal.Name }}
        <div class="text-end">
@@ -41,7 +41,6 @@
 
 <script>
     import Nav from "../../components/website/Nav.vue"
-    import useMenu from "../../composables/Menu.js"
     import useMeals from "../../composables/Meals.js"
     import { onMounted, reactive, ref} from "vue"
     import axios from 'axios'
@@ -53,7 +52,7 @@
           }  
         },
         setup() {
-            const { getMenu, Menu, updateMenu } = useMenu()
+            
             const { meals, getMeals } = useMeals()
 
             const isActive = ref(true);
@@ -62,24 +61,12 @@
                 MealId: []
             })
 
-            const showEditMenu = () => {
-                return isActive.value = !isActive.value;
-            }
-
-            const saveToMenu = async () => {
-                await updateMenu({...form})
-            }
-
-            onMounted(getMenu)
             onMounted(getMeals)
 
             return {
-                Menu,
                 meals,
                 isActive,
-                showEditMenu,
                 form,
-                saveToMenu
             }
         },
         methods: {

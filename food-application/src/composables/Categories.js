@@ -24,6 +24,7 @@ export default function useCategories() {
         try {
             await axios.post('http://localhost:8000/api/category/', data)
         } catch (e) {
+            console.log(data.value)
             if (e.response.status === 422) {
                 for (const key in e.response.data.errors) {
                     errors.value += e.response.data.errors[key][0] + ' ';
@@ -38,6 +39,7 @@ export default function useCategories() {
             await axios.put('http://localhost:8000/api/category/' + CategoryId, category.value)
             await router.push({name: 'Categories'})
         } catch (e) {
+            console.log(category.value)
             if (e.response.status === 422) {
                errors.value = e.response.data.errors
             }

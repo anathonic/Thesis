@@ -3,7 +3,7 @@
         <Admin-nav/>
                 <div class="container-fluid">
         <div class="text-center d-flex justify-content-between align-items-center">
-        <h1 class="text-center">Dania</h1>
+        <h1 class="text-center">Kategorie</h1>
 
         <a class="btn btn-dark m-4" role="button" data-bs-toggle="modal" data-bs-target="#AddMealModal">Dodaj nowe</a>           
         </div>
@@ -45,7 +45,7 @@
                     <div class="modal-content">
                         <form @submit.stop.prevent="saveCategory">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="AddMealModallabel">Dodanie składnika</h5>
+                                <h5 class="modal-title" id="AddMealModallabel">Dodanie kategorii</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -53,6 +53,14 @@
                                     <input type="text" class="form-control" v-model="form.Name" id="Name" placeholder="Nazwa">
                                     <label for="Name">Nazwa</label>
                                 </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="Status" v-model="form.Stat">
+                                    <option value="">-- Wybierz --</option>
+                                    <option value="1">Aktywny</option>
+                                    <option value="0">Nieaktywny</option>
+                                </select>
+                                <label for="Status">Status</label>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-success" data-bs-dismiss="modal" >Dodaj</button>
@@ -78,13 +86,16 @@ import { onMounted, reactive } from "vue"
      components: {AdminNav},
         setup() {
             const { categories, getCategories, getThisCategory, category, storeCategory, errors } = useCategories()
-
+            onMounted(getCategories)
+            
+            
             const form = reactive({
-                Id: '',
                 Name: '',
+                Stat: ''
             })
 
-            onMounted(getCategories)
+           
+
             const saveCategory = async () => {
                 await storeCategory({...form});
                 await getCategories();
@@ -100,7 +111,7 @@ import { onMounted, reactive } from "vue"
             }
             onMounted(getCategories)
             return {
-              getThisCategory,
+                getThisCategory,
                 category,
                 categories,
                 errors,
