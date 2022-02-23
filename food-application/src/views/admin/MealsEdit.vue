@@ -1,4 +1,6 @@
 <template>
+<div id="mealsedit">
+<Admin-nav/>
     <div>
         <div class="row mx-1 mt-3">
             <div class="col-md-4 mb-3">
@@ -15,6 +17,10 @@
                             <div class="form-floating mb-3">
                                 <input type="text" id="Price" class="form-control" name="Price" v-model="meal.Price">
                                 <label for="Price">Cena</label>
+                            </div>
+                            <div class="form-group mb-3">
+                            <label for="Description">Opis</label>
+                            <textarea type="text" class="form-control" v-model="meal.Description" id="Description" rows="15"></textarea>
                             </div>
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="Status" v-model="meal.Status">
@@ -94,16 +100,18 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
-
+import AdminNav from "../../components/admin/AdminNav.vue"
 import { onMounted, reactive } from "vue"
 import useMeals from "../../composables/Meals.js";
 import useIngredients from "../../composables/ingredients";
 import useMealsIngredients from "../../composables/MealsIngredients";
 
 export default{
+    components: { AdminNav },
     props: {
         MealId: {
             required: true,

@@ -17,7 +17,7 @@
        <th scope="col">E-mail</th>
        <th scope="col">Rola</th>
        <th scope="col">Dołączono</th>
-       <th scope="col">Edytuj</th>
+       <!-- <th scope="col">Edytuj</th> -->
        <th scope="col">Usuń</th>
      </tr>
    </thead>
@@ -31,10 +31,10 @@
      <td class="pt-3">{{ user.email }}</td>
      <td class="pt-3">{{ user.role[0].name }}</td>
      <td class="pt-3">{{ user.created_at.split("").slice(0, 10).join("") }}</td>
-     <td>
+     <!-- <td>
      <img src="../../../src/assets/mycollection/png/others/edit.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw"
       v-on:click="() => $router.push({name: 'Users.edit', params: {UserId: user.id}})">
-     </td>
+     </td> -->
      <td>
      <img v-on:click="deleteUser(user.id)" src="../../../src/assets/mycollection/png/others/trash.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw">
 

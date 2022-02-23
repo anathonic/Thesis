@@ -21,6 +21,8 @@ import Forgot from "../components/website/Forgot.vue"
 import Reset from "../components/website/Reset.vue"
 import UsersEdit from "../views/admin/UsersEdit.vue"
 import Payments from "../views/user/Payments.vue"
+import Categories from "../views/admin/Categories.vue"
+import CategoriesEdit from "../views/admin/CategoriesEdit.vue"
 const routes = [
 
   {
@@ -189,6 +191,26 @@ const routes = [
   path: '/usersmanagement',
   name: 'UsersManagement',
   component: UsersManagement,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
+},
+{
+  path: '/categories/:CategoryId/edit',
+  name: 'categories.edit',
+  component: CategoriesEdit,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
+},
+{
+  path: '/categories',
+  name: 'Categories',
+  component: Categories,
   props: true,
   meta: {
     requiresAuth: true,

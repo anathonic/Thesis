@@ -12,6 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mt-4 mt-lg-0">
                 <li class="nav-item active"><a class="nav-link" href="./">Strona internetowa</a></li>
+                                                            <li class="nav-item active"><a class="nav-link" href="./menu">Menu</a></li>
             </ul>
         </div>
     </div>

@@ -13,6 +13,10 @@
                                 <input type="text" id="Name" class="form-control" name="Name" v-model="user.name">
                                 <label for="Name">Imie i nazwisko</label>
                             </div>
+                                                        <div class="form-floating mb-3">
+                                <input type="text" id="password" class="form-control" name="password" v-model="user.password">
+                                <label for="Name">Imie i nazwisko</label>
+                            </div>
                           <div class="form-group">
                             <label>Rola</label>
                             <select class="form-select" v-model="user.role" >

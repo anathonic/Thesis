@@ -15,7 +15,6 @@
       <th class="el" scope="col"><p>Danie</p></th>
       <th class="el" scope="col"><p>Cena</p></th>
       <th class="el" scope="col"><p>Status</p></th>
-      <th class="el" scope="col"><p>Kategoria</p></th>
       <th class="el" scope="col"><p>Edytuj</p></th>
       <th class="el" scope="col"><p>Usuń</p></th>
     </tr>
@@ -28,7 +27,7 @@
     <td class="price pt-3">{{ meal.Name }}</td>
     <td class="pt-3">{{ meal.Price}}zł</td>
     <td class="pt-3">{{ meal.StatusName }}</td>
-    <td class="pt-3">{{ meal.CategoryName}}</td>
+
     <td>
     <img
      src="../../../src/assets/mycollection/png/others/edit.png"
@@ -61,6 +60,10 @@
                                     <input type="text" class="form-control" v-model="form.Price" id="Price" placeholder="Cena">
                                     <label for="Price">Cena</label>
                                 </div>
+                            <div class="form-group mb-3">
+                            <label for="Description">Opis</label>
+                            <textarea type="text" class="form-control" v-model="form.Description" id="Description" rows="15"></textarea>
+                            </div>
                                 <div class="form-floating mb-3">
                                     <select class="form-select" id="Status" v-model="form.Status">
                                         <option value="">-- Wybierz --</option>
@@ -111,6 +114,7 @@ import { onMounted, reactive } from "vue"
                 Name: '',
                 Status: '',
                 Price: '',
+                Description: '',
                 Category: '',
             })
 
