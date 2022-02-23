@@ -11,8 +11,15 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mt-4 mt-lg-0">
-                <li class="nav-item active"><a class="nav-link" href="./">Strona internetowa</a></li>
-                                                            <li class="nav-item active"><a class="nav-link" href="./menu">Menu</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/meals">Dania</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/ingredients">Składniki</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/categories">Kategorie</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/menu">Menu</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/kitchen">Kuchnia</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/orders">Zamówienia</a></li>
+                              <li class="nav-item active"><a class="nav-link" href="/payments">Płatności</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/usersmanagement">Ustawienia</a></li>
+                <li class="nav-item active"><p @click="logout"  class="nav-link"  href=""> Wyloguj</p></li>
             </ul>
         </div>
     </div>
@@ -23,6 +30,7 @@
 import {computed} from 'vue';
 import {useStore} from "vuex";
 import {onMounted, ref} from 'vue';
+import {useRouter} from "vue-router";
 
 export default {
   name: "AdminNav",
@@ -33,6 +41,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const message = ref('Nie jesteś zalogowany!');
     const auth = computed(() => store.state.authenticated)
     onMounted(async () =>{
@@ -48,9 +57,22 @@ export default {
         await store.dispatch('setAuth', false);
       }
     });
+        const logout = async () => {
+      //await fetch('http://127.0.0.1:8000/api/logout'
+      await fetch('http://localhost:8000/api/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+      });
+      localStorage.setItem('jwt', null)
+      localStorage.setItem('role', null)
+      sessionStorage.clear()
+      await router.push('/');
+    }
     return {
       message,
       auth,
+      logout
     }
   }
 }

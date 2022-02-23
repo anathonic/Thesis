@@ -19,7 +19,30 @@
         <p>Składniki</p>
         </div>
         </div>
-
+         <div class="col-md-2">
+        <router-link to="/categories">
+        <img src="../../../src/assets/mycollection/png/food/food-12.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Kategorie</p>
+        </div>
+        </div>
+        <div class="col-md-2">
+        <router-link to="/menu">
+        <img src="../../../src/assets/mycollection/png/others/sushi_menu.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Menu</p>
+        </div>
+        </div>
+        <div class="col-md-2">
+        <router-link to="/kitchen">
+        <img src="../../../src/assets/mycollection/png/others/chef.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Kuchnia</p>
+        </div>
+        </div>
     <div class="col-md-2">
         <router-link to="/orders">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">

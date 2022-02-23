@@ -6,7 +6,7 @@
             <div class="col-md-4 mb-3">
                 <div class="card shadow-lg px-0 mx-0">
                     <div class="card-header">
-                        <h1>Edytuj posiłek</h1>
+                        <h1>Edytuj danie</h1>
                     </div>
                     <div class="card-body">
                         <form v-on:submit.prevent="saveMeal">
