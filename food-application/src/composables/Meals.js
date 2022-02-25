@@ -10,12 +10,12 @@ export default function useMeals() {
     const errors = ref('')
 
     const getMeals = async () =>{
-        let res = await axios.get('http://localhost:8000/api/meals');
+        let res = await axios.get('http://127.0.0.1:8000/api/meals');
         meals.value = res.data.data;
     }
 
     const getThisMeal = async (MealId) =>{
-        let res = await axios.get('http://localhost:8000/api/meals/' + MealId);
+        let res = await axios.get('http://127.0.0.1:8000/api/meals/' + MealId);
         meal.value = res.data.data;
     }
 

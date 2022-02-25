@@ -28,7 +28,9 @@
           </button>
     </div>
     <div class="col-md-2">
+        <router-link to="/yourorders">
         <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
+        </router-link>
         <div class="text-center">
         <p>Twoje Zamówienia</p>
         </div>

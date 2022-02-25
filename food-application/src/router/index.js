@@ -21,6 +21,7 @@ import Forgot from "../components/website/Forgot.vue"
 import Reset from "../components/website/Reset.vue"
 import UsersEdit from "../views/admin/UsersEdit.vue"
 import Payments from "../views/user/Payments.vue"
+import UserOrders from "../views/user/UserOrders.vue"
 const routes = [
 
   {
@@ -209,6 +210,14 @@ const routes = [
   path: '/payments',
   name: 'Payments',
   component: Payments,
+  meta: {
+    requiresAuth: true,
+  },  
+},
+{
+  path: '/userorders',
+  name: 'UserOrders',
+  component: UserOrders,
   meta: {
     requiresAuth: true,
   },  
