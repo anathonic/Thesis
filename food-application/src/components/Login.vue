@@ -20,9 +20,9 @@
           <div v-if="message" class="alert alert-danger text-center mt-3" role="alert">{{message}}</div>
         </div>
     <p class="mt-2">Nie masz jeszcze konta? <a style="color: #000000;" href="./register">Zarejestruj się</a>.</p>
-     <div class="text-end">
+     <!-- <div class="text-end">
     <p style="font-size: 14px;">Zapomniałeś hasła? <a style="color: #000000;" href="./forgot">Zresetuj hasło</a>.</p>
-          </div>
+          </div> -->
               <div class="merge d-flex justify-content-center flex-column">
       <button class="btn btn-light shadow-sm btn-block btn-lg mb-4">Zaloguj się</button>
             </div>

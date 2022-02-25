@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-md-2">
         <router-link to="/meals">
-        <img src="../../../src/assets/mycollection/png/food/food-5.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/new/recipe-book.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
         <p>Dania</p>
@@ -13,16 +13,39 @@
         </div>
          <div class="col-md-2">
         <router-link to="/ingredients">
-        <img src="../../../src/assets/mycollection/png/food/food-14.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/new/food.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
         <p>Składniki</p>
         </div>
         </div>
-
+         <div class="col-md-2">
+        <router-link to="/categories">
+        <img src="../../../src/assets/mycollection/png/new/subfolder.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Kategorie</p>
+        </div>
+        </div>
+        <div class="col-md-2">
+        <router-link to="/adminmenu">
+        <img src="../../../src/assets/mycollection/png/new/menu-3.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Menu</p>
+        </div>
+        </div>
+        <div class="col-md-2">
+        <router-link to="/">
+        <img src="../../../src/assets/mycollection/png/new/www.png" class="img-fluid" alt="Responsive image">
+        </router-link>
+        <div class="text-center">
+        <p>Strona internetowa</p>
+        </div>
+        </div>
     <div class="col-md-2">
         <router-link to="/orders">
-        <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/new/delivery-courier.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
         <p>Zamówienia</p>
@@ -30,21 +53,21 @@
     </div>
 
     <div class="col-md-2">
-<img src="../../../src/assets/mycollection/png/payment/payment-2.png" class="img-fluid" alt="Responsive image">
+<img src="../../../src/assets/mycollection/png/new/money.png" class="img-fluid" alt="Responsive image">
         <div class="text-center">
         <p>Płatności</p>
         </div>
     </div>
     <div class="col-md-2">
         <router-link to="/usersmanagement">
-<img src="../../../src/assets/mycollection/png/others/settings-1.png" class="img-fluid" alt="Responsive image">
+<img src="../../../src/assets/mycollection/png/new/programmer-1.png" class="img-fluid" alt="Responsive image">
         </router-link>
        <div class="text-center">
         <p>Użytkownicy </p>
         </div>
     </div>
     <div class="col-md-2">
-        <img @click="logout" src="../../../src/assets/mycollection/png/others/neko.png" class="img-fluid" alt="Responsive image">
+        <img @click="logout" src="../../../src/assets/mycollection/png/new/exit-4.png" class="img-fluid" alt="Responsive image">
         <div class="text-center">
         <p>Wyloguj się</p>
         </div>

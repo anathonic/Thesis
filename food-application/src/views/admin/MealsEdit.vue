@@ -1,10 +1,12 @@
 <template>
+<div id="mealsedit">
+<Admin-nav/>
     <div>
         <div class="row mx-1 mt-3">
             <div class="col-md-4 mb-3">
                 <div class="card shadow-lg px-0 mx-0">
                     <div class="card-header">
-                        <h1>Edytuj posiłek</h1>
+                        <h1>Edytuj danie</h1>
                     </div>
                     <div class="card-body">
                         <form v-on:submit.prevent="saveMeal">
@@ -16,6 +18,10 @@
                                 <input type="text" id="Price" class="form-control" name="Price" v-model="meal.Price">
                                 <label for="Price">Cena</label>
                             </div>
+                            <div class="form-group mb-3">
+                            <label for="Description">Opis</label>
+                            <textarea type="text" class="form-control" v-model="meal.Description" id="Description" rows="15"></textarea>
+                            </div>
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="Status" v-model="meal.Status">
                                     <option value="">-- Wybierz --</option>
@@ -26,17 +32,13 @@
                                 <label for="Status">Status</label>
                             </div>
                              <div class="form-floating mb-3">
-                                <select class="form-select" id="Category" v-model="meal.Category">
-                                    <option value="">-- Wybierz --</option>
-                                    <option value="1">Dania główne</option>
-                                    <option value="2">Przystawki</option>
-                                    <option value="3">Napoje</option>
-                                    <option value="4">Zupy</option>
-                                    <option value="5">Zestawy</option>
-                                    <option value="6">Desery</option>
-                                </select>
-                                <label for="Status">Kategoria</label>
-                            </div>
+                                    <select class="form-select" id="Status" v-model="meal.Category">
+                                       <template v-for="category in categories" :key="category.id">
+                                        <option :value="category.id"> {{ category.Name }} </option>
+                                       </template>
+                                    </select>
+                                    <label for="Status">Kategoria</label>
+                                </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-dark">Zapisz</button>
                             </div>
@@ -66,9 +68,9 @@
                                     <td>
                                         {{ mealIngredient.IngName }}
                                     </td>
-                                    <td class=" d-flex justify-content-end pe-2">
-                                        <button class="btn btn-sm p-0" @click="deleteMealIngredient(mealIngredient.MealIngId)"><i class="fa fa-minus"></i></button>
-                                    </td>
+                                    <td class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-dark" @click="deleteMealIngredient(mealIngredient.MealIngId)">-<i class="fa fa-minus"></i></button>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,11 +83,11 @@
                                 <div class="form-floating">
                                     <select v-model="form.IngId" class="form-select" id="floatingSelect">
                                         <option value="" selected>--wybierz--</option>
-                                        <option v-for="ingredient in ingredients" v-bind:key="ingredient.IngId">
+                                        <option :value="ingredient.IngId" v-for="ingredient in ingredients" v-bind:key="ingredient.IngId">
                                             {{ingredient.IngName}}
                                         </option>
                                     </select>
-                                    <label for="floatingSelect">Dodaj skłdanik</label>
+                                    <label for="floatingSelect">Dodaj danie</label>
                                 </div>
                             </form>
                         </div>
@@ -94,16 +96,19 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
-
+import AdminNav from "../../components/admin/AdminNav.vue"
 import { onMounted, reactive } from "vue"
 import useMeals from "../../composables/Meals.js";
+import useCategories from "../../composables/Categories.js"
 import useIngredients from "../../composables/ingredients";
 import useMealsIngredients from "../../composables/MealsIngredients";
 
 export default{
+    components: { AdminNav },
     props: {
         MealId: {
             required: true,
@@ -112,10 +117,12 @@ export default{
     },
   
     setup(props) {
+        const { categories, getCategories, getThisCategory, category} = useCategories()
         const { getThisMeal, updateMeal, meal, errors } = useMeals()
         const { getIng, ingredients } = useIngredients()
         const { getMealsIngredients, mealsIngredients, storeMealsIngredients, destroyMealsIngredients } = useMealsIngredients()
-
+onMounted(getCategories)
+           
         const form = reactive({
             IngId: '',
             MealId: props.MealId,
@@ -130,6 +137,7 @@ export default{
         }
 
         const saveOnChange = async () => {
+            console.log(form)
             await storeMealsIngredients({...form})
             await getMealsIngredients(props.MealId)
             form.IngId = '';
@@ -141,6 +149,10 @@ export default{
         }
         
         return {
+            categories,
+            category,
+            getCategories,
+            getThisCategory,
             meal,
             errors,
             saveMeal,

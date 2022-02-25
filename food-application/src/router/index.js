@@ -22,6 +22,9 @@ import Reset from "../components/website/Reset.vue"
 import UsersEdit from "../views/admin/UsersEdit.vue"
 import Payments from "../views/user/Payments.vue"
 import UserOrders from "../views/user/UserOrders.vue"
+import Categories from "../views/admin/Categories.vue"
+import CategoriesEdit from "../views/admin/CategoriesEdit.vue"
+import AdminMenu from "../views/admin/AdminMenu.vue"
 const routes = [
 
   {
@@ -111,6 +114,15 @@ const routes = [
     component: Menu
   },
   {
+    path: '/adminmenu',
+    name: 'AdminMenu',
+    component: AdminMenu,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
+  },
+  {
     path: '/ingredients',
     name: 'Ingredients.index',
     component: Ingredients,
@@ -190,6 +202,26 @@ const routes = [
   path: '/usersmanagement',
   name: 'UsersManagement',
   component: UsersManagement,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
+},
+{
+  path: '/categories/:CategoryId/edit',
+  name: 'categories.edit',
+  component: CategoriesEdit,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
+  },  
+},
+{
+  path: '/categories',
+  name: 'Categories',
+  component: Categories,
   props: true,
   meta: {
     requiresAuth: true,

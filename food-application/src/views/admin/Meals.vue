@@ -15,7 +15,6 @@
       <th class="el" scope="col"><p>Danie</p></th>
       <th class="el" scope="col"><p>Cena</p></th>
       <th class="el" scope="col"><p>Status</p></th>
-      <th class="el" scope="col"><p>Kategoria</p></th>
       <th class="el" scope="col"><p>Edytuj</p></th>
       <th class="el" scope="col"><p>Usuń</p></th>
     </tr>
@@ -28,7 +27,7 @@
     <td class="price pt-3">{{ meal.Name }}</td>
     <td class="pt-3">{{ meal.Price}}zł</td>
     <td class="pt-3">{{ meal.StatusName }}</td>
-    <td class="pt-3">{{ meal.CategoryName}}</td>
+
     <td>
     <img
      src="../../../src/assets/mycollection/png/others/edit.png"
@@ -49,7 +48,7 @@
                     <div class="modal-content">
                         <form @submit.stop.prevent="saveMeal">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="AddMealModallabel">Dodanie składnika</h5>
+                                <h5 class="modal-title" id="AddMealModallabel">Dodanie dania</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -61,24 +60,23 @@
                                     <input type="text" class="form-control" v-model="form.Price" id="Price" placeholder="Cena">
                                     <label for="Price">Cena</label>
                                 </div>
+                            <div class="form-group mb-3">
+                            <label for="Description">Opis</label>
+                            <textarea type="text" class="form-control" v-model="form.Description" id="Description" rows="15"></textarea>
+                            </div>
                                 <div class="form-floating mb-3">
                                     <select class="form-select" id="Status" v-model="form.Status">
                                         <option value="">-- Wybierz --</option>
                                         <option value="1">Aktywny</option>
                                         <option value="0">Nieaktywny</option>
-                                        <option value="2">Brak na stanie</option>
                                     </select>
                                     <label for="Status">Status</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <select class="form-select" id="Status" v-model="form.Category">
-                                        <option value="">-- Wybierz --</option>
-                                        <option value="1">Dania główne</option>
-                                        <option value="2">Przystawki</option>
-                                        <option value="3">Napoje</option>
-                                        <option value="4">Zupy</option>
-                                        <option value="5">Zestawy</option>
-                                        <option value="6">Desery</option>
+                                       <template v-for="category in categories" :key="category.id">
+                                        <option :value="category.id"> {{ category.Name }} </option>
+                                       </template>
                                     </select>
                                     <label for="Status">Kategoria</label>
                                 </div>
@@ -96,6 +94,7 @@
 
 <script>
 import axios from 'axios'
+import useCategories from "../../composables/Categories.js"
 import useMeals from "../../composables/Meals.js"
 import AdminNav from "../../components/admin/AdminNav.vue"
 
@@ -105,16 +104,27 @@ import { onMounted, reactive } from "vue"
    export default {
      components: {AdminNav},
         setup() {
+             const { categories, getCategories, getThisCategory, category} = useCategories()
             const { meals, getMeals, getThisMeal, meal, storeMeal, errors } = useMeals()
+           onMounted(getCategories)
+            
+            
+            const formC = reactive({
+                Name: ''
+            })
 
-            const form = reactive({
+            
+            onMounted(getCategories)
+           
+            onMounted(getMeals)
+             const form = reactive({
                 Name: '',
                 Status: '',
                 Price: '',
+                Description: '',
                 Category: '',
             })
 
-            onMounted(getMeals)
             const saveMeal = async () => {
                 await storeMeal({...form});
                 await getMeals();
@@ -130,6 +140,10 @@ import { onMounted, reactive } from "vue"
             }
             onMounted(getMeals)
             return {
+                formC,
+               getThisCategory,
+                category,
+                categories,
               getThisMeal,
                 meal,
                 meals,

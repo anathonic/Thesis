@@ -4,7 +4,7 @@
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" id="navbar">
     <div class="container-fluid">
            <router-link to="/">
-        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid mb-3" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/user/user-3.png" class="img-fluid mb-3" alt="Responsive image">
      </router-link> 
            <!-- <form class="d-flex m-2 ">
          <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./login" role="button">Zamów online</a>
@@ -91,7 +91,9 @@ export default {
     const auth = computed(() => store.state.authenticated)
     onMounted(async () =>{
       try {
-        const respone = await fetch('http://127.0.0.1:8000/api/user',{
+        const respone = 
+        await fetch('http://127.0.0.1:8000/api/user',{
+        //await fetch('http://localhost:8000/api/user',{
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });
@@ -104,6 +106,7 @@ export default {
     });
     const logout = async () => {
       await fetch('http://127.0.0.1:8000/api/logout', {
+      //await fetch('http://localhost:8000/api/logout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
