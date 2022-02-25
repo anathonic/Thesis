@@ -23,6 +23,7 @@ import UsersEdit from "../views/admin/UsersEdit.vue"
 import Payments from "../views/user/Payments.vue"
 import Categories from "../views/admin/Categories.vue"
 import CategoriesEdit from "../views/admin/CategoriesEdit.vue"
+import AdminMenu from "../views/admin/AdminMenu.vue"
 const routes = [
 
   {
@@ -110,6 +111,15 @@ const routes = [
     path: '/menu',
     name: 'Menu',
     component: Menu
+  },
+  {
+    path: '/adminmenu',
+    name: 'AdminMenu',
+    component: AdminMenu,
+    meta: {
+      requiresAuth: true,
+      permission: true
+    },  
   },
   {
     path: '/ingredients',

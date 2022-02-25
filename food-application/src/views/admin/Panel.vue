@@ -28,7 +28,7 @@
         </div>
         </div>
         <div class="col-md-2">
-        <router-link to="/menu">
+        <router-link to="/adminmenu">
         <img src="../../../src/assets/mycollection/png/new/menu-3.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
