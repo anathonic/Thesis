@@ -93,8 +93,8 @@ export default {
     onMounted(async () =>{
       try {
         const respone = 
-        //await fetch('http://127.0.0.1:8000/api/user'
-        await fetch('http://localhost:8000/api/user',{
+        await fetch('http://127.0.0.1:8000/api/user',{
+        //await fetch('http://localhost:8000/api/user',{
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });
@@ -106,8 +106,8 @@ export default {
       }
     });
     const logout = async () => {
-      //await fetch('http://127.0.0.1:8000/api/logout'
-      await fetch('http://localhost:8000/api/logout', {
+      await fetch('http://127.0.0.1:8000/api/logout', {
+      //await fetch('http://localhost:8000/api/logout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

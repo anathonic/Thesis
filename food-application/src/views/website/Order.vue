@@ -18,8 +18,45 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
+
+
+  <div class="card-body table-responsive m-5" :style="{display: isActive ? 'block' : 'none'}">
+  <tbody>
+    <tr
+    v-for="category in categories"
+    :key="category.Name"
+    >
+      <table class="table table-sm">
+      <thead>    
+      <tr v-if="category.Stat === 1 ">
+       <th scope="col"  style="font-size: 14px; font-weight: bold;">{{category.Name}}</th>             
+       </tr>
+       </thead>
+ <tbody>
+ <tr
+    v-for="meal in meals"
+    :key="meal.CategoryName"
+    >
+       <td v-if="meal.Category == category.id && meal.StatusName === 'Aktywny' && category.Stat === 1 "> 
+      <div style="font-size: 1.2vw; font-weight: bold;">
+       {{ meal.Name }}
+       <div class="text-end">
+       {{ meal.Price}}PLN
+            <button class="button-add-to-basket" @click="addToBasket(meal.Name, meal.Price, meal.MealId)">
+                <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
+            </button>
+       </div>
+      </div>
+     {{ meal.Description }}
+     </td>
+    </tr>
+</tbody>
+</table>
+    </tr>
+  </tbody>
+  </div>
+
+<!--
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table">
@@ -46,32 +83,11 @@
                         </td>
                         </tr>
                     </tbody>
-                    <thead style="border-top: 2px solid currentColor">
-                        <tr><th scope="col">Napoje</th></tr>
-                    </thead>
-                    <thead style="border: none">
-                        <tr>
-                        <th scope="col">Napój</th>
-                        <th scope="col">Opis</th>
-                        <th scope="col">Cena</th>
-                        <th scope="col">Dodaj</th>
-                        </tr>
-                    </thead>
-                    <tbody v-for="drink in drinks" :key="drink.MealId" >
-                        <tr v-if="drink.Status != '0'">
-                        <td class="pt-3">{{ drink.Name }}</td>
-                        <td class="pt-3">{{ drink.Description }}</td>
-                        <td class="pt-3" style="currency">{{ drink.Price }}<span> PLN</span></td>
-                        <td>
-                            <button class="button-add-to-basket" @click="addToBasket(drink.Name, drink.Price, drink.MealId)">
-                                <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
-                            </button>
-                        </td>
-                        </tr>
-                    </tbody>
+
                     </table>
                 </div>
             </div>
+            -->
         </div>
     </div>
     <basketModal :totalPrice="$store.state.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
@@ -84,6 +100,8 @@ import basketModal from '../../components/website/basket-modal-component.vue';
 import axios from 'axios'
 import UserNav from '../../components/user/UserNav.vue';
 import Vuex from 'vuex'
+import useMeals from "../../composables/Meals.js"
+import { onMounted, reactive, ref} from "vue"
 import createPersistedState from 'vuex-persistedstate'
 const $store = new Vuex.Store({
         plugins: [createPersistedState({
@@ -118,29 +136,53 @@ export default {
     name: 'Order',
     data () {
         return {
-            meals: [],
+            //meals: [],
             drinks: [],
             url: window.location.origin,
             showModal: false,
             orderData: [],
             $store: $store,
+            categories: []
         }
     },
+    setup() {
+            
+        const { meals, getMeals } = useMeals()
+        const isActive = ref(true);
+            
+        const form = reactive({
+            MealId: []
+        })
+        onMounted(getMeals)
+        return {
+            meals,
+            isActive,
+            form,
+            }
+    },
     methods: {
-        getMeals() {
-            axios.get('menu/category/0').then(response => {
+         getCategories() {
+            axios.get('category').then(response => {
                 if(response.status >= 200 && response.status < 300){
-                    this.meals = response.data.data
-                }
-                console.log(response.data);
-            })
-            axios.get('menu/category/1').then(response => {
-                if(response.status >= 200 && response.status < 300){
-                    this.drinks = response.data.data
+                    this.categories = response.data.data
                 }
                 console.log(response.data);
             })
         },
+        //getMeals() {
+        //    axios.get('menu/category/0').then(response => {
+         //       if(response.status >= 200 && response.status < 300){
+         //           this.meals = response.data.data
+          //      }
+          //      console.log(response.data);
+         //   })
+          //  axios.get('menu/category/1').then(response => {
+          //      if(response.status >= 200 && response.status < 300){
+         //           this.drinks = response.data.data
+          //      }
+          //      console.log(response.data);
+         //   })
+      //  },
         addToBasket(MealName, MealPrice, MealId) {
             $store.commit('add', {Name: MealName, Price: MealPrice, MealId: MealId});
             //eslint-disable-next-line
@@ -170,7 +212,8 @@ export default {
         },
     },
     mounted () {
-        this.getMeals()
+        //this.getMeals();
+        this.getCategories();
         }
     }
 </script>

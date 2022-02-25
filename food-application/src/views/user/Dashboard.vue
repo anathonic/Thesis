@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-md-2">
         <router-link to="/account">
-        <img src="../../../src/assets/mycollection/png/user/user-3.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/user/user-8.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
         <p>Konto</p>
@@ -13,7 +13,7 @@
         </div>
     <div class="col-md-2">
         <router-link to="/order">
-<img src="../../../src/assets/mycollection/png/new/online-shopping.png" class="img-fluid" alt="Responsive image">
+<img src="../../../src/assets/mycollection/png/food/food-6.png" class="img-fluid" alt="Responsive image">
         </router-link>     
         <div class="text-center">
         <p>Zamów online</p>
@@ -21,28 +21,30 @@
     </div>
         <div class="col-md-2">
           <button style="border: none; background: none;" @click="openModal">
-<img src="../../../src/assets/mycollection/png/new/shopping-cart-2.png" class="img-fluid" alt="Responsive image">
+<img src="../../../src/assets/mycollection/png/others/shopping-basket-1.png" class="img-fluid" alt="Responsive image">
        <div class="text-center">
         <p>Koszyk</p>
         </div>
           </button>
     </div>
     <div class="col-md-2">
-        <img src="../../../src/assets/mycollection/png/new/delivery-courier.png" class="img-fluid" alt="Responsive image">
+        <router-link to="/yourorders">
+        <img src="../../../src/assets/mycollection/png/delivery/scooter-1.png" class="img-fluid" alt="Responsive image">
+        </router-link>
         <div class="text-center">
         <p>Twoje Zamówienia</p>
         </div>
     </div>
     <div class="col-md-2">
         <router-link to="/settings">
-        <img src="../../../src/assets/mycollection/png/new/settings_2.png" class="img-fluid" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/others/settings-1.png" class="img-fluid" alt="Responsive image">
         </router-link>
         <div class="text-center">
         <p>Ustawienia</p>
         </div>
     </div>
     <div class="col-md-2">
-        <img @click="logout" src="../../../src/assets/mycollection/png/new/exit-4.png" class="img-fluid" alt="Responsive image">
+        <img @click="logout" src="../../../src/assets/mycollection/png/others/neko.png" class="img-fluid" alt="Responsive image">
         <div class="text-center">
         <p>Wyloguj się</p>
         </div>
@@ -103,7 +105,7 @@ components: { UserNav, basketModal},
     
     onMounted(async () =>{
       try {
-        const respone = await fetch('http://localhost:8000/api/user',{
+        const respone = await fetch('http://127.0.0.1:8000/api/user',{
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',
         });
@@ -115,7 +117,7 @@ components: { UserNav, basketModal},
       }
     });
     const logout = async () => {
-      await fetch('http://localhost:8000/api/logout', {
+      await fetch('http://127.0.0.1:8000/api/logout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

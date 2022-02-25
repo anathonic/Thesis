@@ -38,7 +38,7 @@ components: { },
   },
   methods: {
   pay(){
-      sessionStorage.clear()
+      sessionStorage.clear();
       this.$router.push('/');
   },
   imgPush() {

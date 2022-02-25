@@ -21,6 +21,7 @@ import Forgot from "../components/website/Forgot.vue"
 import Reset from "../components/website/Reset.vue"
 import UsersEdit from "../views/admin/UsersEdit.vue"
 import Payments from "../views/user/Payments.vue"
+import UserOrders from "../views/user/UserOrders.vue"
 import Categories from "../views/admin/Categories.vue"
 import CategoriesEdit from "../views/admin/CategoriesEdit.vue"
 import AdminMenu from "../views/admin/AdminMenu.vue"
@@ -241,6 +242,14 @@ const routes = [
   path: '/payments',
   name: 'Payments',
   component: Payments,
+  meta: {
+    requiresAuth: true,
+  },  
+},
+{
+  path: '/userorders',
+  name: 'UserOrders',
+  component: UserOrders,
   meta: {
     requiresAuth: true,
   },  
