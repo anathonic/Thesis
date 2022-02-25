@@ -3,7 +3,7 @@
 <div id="userwrapper">
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" id="navbar">
     <div class="container-fluid">
-           <router-link to="/">
+           <router-link to="/dashboard">
         <img src="../../../src/assets/mycollection/png/user/user-3.png" class="img-fluid mb-3" alt="Responsive image">
      </router-link> 
            <!-- <form class="d-flex m-2 ">
@@ -26,6 +26,7 @@
       </button>
       <div class="mt-2 collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ms-auto mt-4 mt-lg-0 p-2">
+              <li class="nav-item active"><a class="nav-link" href="/">Strona internetowa</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/dashboard">Panel główny</a></li>
                  <li class="nav-item active"><a class="nav-link" href="/account">Konto</a></li>
                   <li class="nav-item active"><a class="nav-link" href="/order">Zamów online</a></li>
