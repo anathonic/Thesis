@@ -2,18 +2,27 @@
   <div id="management">
       <Admin-nav/>
       <div class="column">
-     <div class="mt-5 d-flex justify-content-end" >
+        <div class="text-end">
+     <div class="mt-5 d-flex-column justify-content-end" >
        <router-link to="/UserCreate">
-      <button class="mb-3 btn btn-dark">Dodaj uzytkownika</button>
+      <button class="mb-3 btn btn-dark">Dodaj użytkownika</button>
       </router-link>
+      <p>Liczba użytkowników: {{ users.length }} </p>
       </div>
-    <h2>Uzytkownicy</h2>
-
+      </div>
+      <div class="d-flex-column">
+    <h2>Użytkownicy</h2>
 <div class="input-group">
   <div class="form-outline">
-  <input type="search" class="form-control rounded" placeholder="Szukaj" aria-label="Search" aria-describedby="search-addon"  v-model="searchQuery" />
+  <input type="search" class="form-control rounded" placeholder="Szukaj" aria-label="search" aria-describedby="search-addon"  v-model="searchQuery" />
 </div>
 </div>
+</div>
+
+<div>
+<p class="mt-3" v-if="searchQuery != ''">Liczba rekordów spełniających zapytanie: {{ searchedUsers.length }} </p>
+</div>
+
 <table class="table">
   
    <thead>
@@ -61,9 +70,9 @@ import AdminNav from '../../components/admin/AdminNav.vue'
 export default {
   components: { AdminNav },
          setup() {
+           
            const searchQuery = ref("");
-            const { user, users, getUsers, storeUsers, destroyUser, errors } = useUsers()
-
+          const { user, users, getUsers, storeUsers, destroyUser, errors } = useUsers()
             onMounted(getUsers)
             const form = reactive({
                 Name: '',
@@ -76,10 +85,12 @@ export default {
           const searchedUsers = computed(()=> {
             return users.value.filter((user)=>{
               return(
-                user.email.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.role[0].name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 
+                user.email.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.role[0].name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.email.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 
               );
             });
           });
+
+
 
             const deleteUser = async (UserId) => {
                 if(!window.confirm('Czy napewno usunąć ten składnik?')){
