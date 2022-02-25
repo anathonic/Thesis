@@ -8,6 +8,12 @@
       </router-link>
       </div>
     <h2>Uzytkownicy</h2>
+
+<div class="input-group">
+  <div class="form-outline">
+  <input type="search" class="form-control rounded" placeholder="Szukaj" aria-label="Search" aria-describedby="search-addon"  v-model="searchQuery" />
+</div>
+</div>
 <table class="table">
   
    <thead>
@@ -23,7 +29,7 @@
    </thead>
    <tbody>
      <tr
-     v-for="user in users"
+     v-for="user in searchedUsers"
      :key="user.id"
      >
      <th class="pt-3" scope="row">{{ user.id }}</th>
@@ -49,12 +55,13 @@
 
 <script>
 
-import { onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import useUsers from "../../composables/Users.js";
 import AdminNav from '../../components/admin/AdminNav.vue'
 export default {
   components: { AdminNav },
          setup() {
+           const searchQuery = ref("");
             const { user, users, getUsers, storeUsers, destroyUser, errors } = useUsers()
 
             onMounted(getUsers)
@@ -65,9 +72,14 @@ export default {
                 await storeUsers({...form});
                 await getUsers();
             }
-
-
  
+          const searchedUsers = computed(()=> {
+            return users.value.filter((user)=>{
+              return(
+                user.email.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.role[0].name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 || user.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1 
+              );
+            });
+          });
 
             const deleteUser = async (UserId) => {
                 if(!window.confirm('Czy napewno usunąć ten składnik?')){
@@ -81,7 +93,8 @@ export default {
             onMounted(getUsers)
 
             return {
-
+                searchQuery,
+                searchedUsers,
                 deleteUser,
                 saveUsers,
                 form,
