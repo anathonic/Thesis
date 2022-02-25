@@ -4,8 +4,8 @@
         <router-link to="/panel">
         <img src="../../../src/assets/mycollection/png/others/menu.png" class="img-fluid p-2 " alt="Responsive image">
         </router-link>
-        <div class="mess">
-         <a class="navbar-brand ms-3" href="/panel">Admin Panel </a>
+        <div class="text-center m-3">
+         <a class="navbar-brand" href="/panel">Admin Panel </a>
            <p>{{message}}</p>
            </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
