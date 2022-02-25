@@ -5,7 +5,7 @@ export default function useOrders() {
     const Orders = ref([])
 
     const getOrders = async () =>{
-        let res = await axios.get('/api/orders');
+        let res = await axios.get('/orders');
         Orders.value = res.data.data;
     }
 

@@ -14,15 +14,15 @@
 </div>
           <tbody>
               <tr 
-v-for="Order in Orders" v-bind:key="Order.OrderId"
+v-for="Order in searchedOrders" v-bind:key="Order.OrderId"
     >
 <vue-collapsible-panel-group>
     <vue-collapsible-panel :expanded="false">
         <template #title>
-    <div class="d-flex flex-column text-center">
-    <td class="pt-3">Zamówienie numer: {{ Order.OrderNo }} </td>
-    <td class="pt-3"><h5>{{ Order.OrderDate }}</h5> </td>
-    <td class="pt-3"><h5>{{ Order.Status }}</h5> </td>
+    <div class="d-flex flex-column text-start">
+    <td class="pt-3"><h5>Zamówienie nr: {{ Order.OrderNo }} | Data złożenia: {{ Order.OrderDate }}</h5> 
+    </td>
+    <td class="pt-3"><h5>Status zamówienia: {{ Order.Status }}</h5> </td>
     </div>
         </template>
         <template #content>
@@ -31,7 +31,15 @@ v-for="Order in Orders" v-bind:key="Order.OrderId"
     <td class="pt-3" >Typ: {{ Order.OrderTypeName}}</td>
     <td class="pt-3">Cena: {{ Order.OrderPrice }}</td>
     <td class="pt-3">Zakończono: {{ Order.EndDate}}</td>
-    <td class="pt-3">Id uzytkownika: {{ Order.UserId }}</td>
+    <td class="pt-3">Id użytkownika: {{ Order.UserId }}</td>
+     <tr 
+v-for="user in users" v-bind:key="user.id"
+    >
+    <div v-if="user.id === Order.UserId">
+    <td class="pt-3">Imie: {{ user.name }}</td>
+    <td class="pt-3">Email: {{ user.email }}</td>
+    </div>
+     </tr>
     </div>
         </template>
       
