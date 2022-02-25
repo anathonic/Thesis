@@ -5,7 +5,7 @@
                 <div class="mt-5 col-md-3 col-sm-6 col-xs-12">
                     <div class="account">
                         <div class="text-center">
-                         <img src="../../../src/assets/mycollection/png/others/avatar.png" class="img-fluid" alt="Responsive image">
+                         <img src="../../../src/assets/mycollection/png/new/user128.png" class="img-fluid" alt="Responsive image">
                          </div>
                          <div class="mt-3 text-center d-flex flex-column align-items-center">
     <p>Nazwa uzytkownika: {{user_name}}</p>

@@ -4,7 +4,7 @@
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4" id="navbar">
     <div class="container-fluid">
            <router-link to="/">
-        <img src="../../../src/assets/mycollection/png/food/food-13.png" class="img-fluid mb-3" alt="Responsive image">
+        <img src="../../../src/assets/mycollection/png/user/user-3.png" class="img-fluid mb-3" alt="Responsive image">
      </router-link> 
            <!-- <form class="d-flex m-2 ">
          <a class="btn btn-outline-dark shadow-sm btn-lg ms-3" href="./login" role="button">Zamów online</a>
