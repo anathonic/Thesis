@@ -7,8 +7,8 @@
           </div>
           <div class="text-center">
           <div class="input-group">
-  <div class="form-outline">
-  <input type="search" class="form-control rounded" placeholder="Szukaj" aria-label="Search" aria-describedby="search-addon"  v-model="searchQuery" />
+  <div class="form-outline mb-5">
+  <input type="search" class="form-control rounded" placeholder="Nr zamówienia" aria-label="Search" aria-describedby="search-addon"  v-model="searchQuery" />
 </div>
 </div>
 </div>
@@ -28,23 +28,50 @@ v-for="Order in searchedOrders" v-bind:key="Order.OrderId"
         <template #content>
     <div class="d-flex flex-column">
         <h5>Szczegóły zamówienia:</h5>
-    <td class="pt-3" >Typ: {{ Order.OrderTypeName}}</td>
-    <td class="pt-3">Cena: {{ Order.OrderPrice }}</td>
-    <td class="pt-3">Zakończono: {{ Order.EndDate}}</td>
-    <td class="pt-3">Id użytkownika: {{ Order.UserId }}</td>
+     <tr 
+     
+v-for="Detail in Order.Details" v-bind:key="Detail"
+    >
+    <td class="p-3"> {{Detail.Quantity}} x {{Detail.Name}}</td>
+     </tr>
+         <h4>Suma całkowita:</h4>
+    <td class="p-3"> {{Order.OrderPrice }} PLN</td>
      <tr 
 v-for="user in users" v-bind:key="user.id"
     >
-    <div v-if="user.id === Order.UserId">
-    <td class="pt-3">Imie: {{ user.name }}</td>
-    <td class="pt-3">Email: {{ user.email }}</td>
+    <div class="text-start" v-if="user.id === Order.UserId && Order.OrderType == '3' ">
+    <h4>Użytkownik:</h4>
+    <td class="p-3">ID: {{ user.id }} </td>
+    <td class="p-3">Imię i nazwisko: {{ user.name }} </td>
+    <td class="p-3">Email: {{ user.email }}</td>
     </div>
+    
+     </tr>
+     <tr 
+v-for="address in addresses" v-bind:key="address.UserId"
+    >
+    <div class="text-start" v-if="address.UserId === Order.UserId && Order.OrderType == '3' ">
+    <h4>Dowóz na adres:</h4>
+    <td class="p-3">Ulica: {{ address.Address }} </td>
+    <td class="p-3">Kod pocztowy: {{ address.PostalCode }}</td>
+    <td class="p-3">Miasto: {{ address.City }}</td>
+    <h4>Numer telefonu:</h4>
+    <td class="p-3">{{ address.PhoneNumber }}</td>
+    </div>
+    
      </tr>
     </div>
         </template>
       
     </vue-collapsible-panel>
 </vue-collapsible-panel-group>
+<!-- <h4 class="mt-3">Zakończono:</h4>
+<div class="p-3" v-if="Order.EndDate != null ">
+<td> {{Order.EndDate}} </td>
+</div>
+<div class="p-3" v-if="Order.EndDate == null ">
+<td> Zamówienie w trakcie realizacji </td>
+</div> -->
               </tr>
               </tbody>
       </div>
@@ -57,10 +84,29 @@ import AdminNav from '../../components/admin/AdminNav.vue'
 import useOrders from '../../composables/Orders.js'
 import useUsers from "../../composables/Users.js"
 import { onMounted, ref, computed } from "vue";
-    
+import axios from 'axios'
     export default {
 components: {AdminNav },
-
+    data () {
+        return {
+            addresses: [],
+            url: window.location.origin
+        }
+    },
+    methods: {
+        getAddresses (){
+    axios.get('addresses').then(response => {
+            if(response.status >= 200 && response.status < 300){
+                console.log('yes')
+                this.addresses = response.data.data;
+                console.log(this.addresses);
+          }
+        })
+        }
+    },
+    mounted (){
+        this.getAddresses()
+    },
         setup() {
            const searchQuery = ref("");
             const { user, users, getUsers} = useUsers()
