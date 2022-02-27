@@ -22,7 +22,7 @@ v-for="Order in searchedOrders" v-bind:key="Order.OrderId"
     <div class="d-flex flex-column text-start">
     <td class="pt-3"><h5>Zamówienie nr: {{ Order.OrderNo }} | Data złożenia: {{ Order.OrderDate }}</h5> 
     </td>
-    <td class="pt-3"><h5>Status zamówienia: {{ Order.Status }}</h5> </td>
+    <td class="pt-3"><h5>Status zamówienia: {{ Order.StatusName }}</h5> </td>
     </div>
         </template>
         <template #content>
@@ -34,13 +34,13 @@ v-for="Detail in Order.Details" v-bind:key="Detail"
     >
     <td class="p-3"> {{Detail.Quantity}} x {{Detail.Name}}</td>
      </tr>
-         <h4>Suma całkowita:</h4>
+         <h5>Suma całkowita:</h5>
     <td class="p-3"> {{Order.OrderPrice }} PLN</td>
      <tr 
 v-for="user in users" v-bind:key="user.id"
     >
     <div class="text-start" v-if="user.id === Order.UserId && Order.OrderType == '3' ">
-    <h4>Użytkownik:</h4>
+    <h5>Użytkownik:</h5>
     <td class="p-3">ID: {{ user.id }} </td>
     <td class="p-3">Imię i nazwisko: {{ user.name }} </td>
     <td class="p-3">Email: {{ user.email }}</td>
@@ -51,11 +51,11 @@ v-for="user in users" v-bind:key="user.id"
 v-for="address in addresses" v-bind:key="address.UserId"
     >
     <div class="text-start" v-if="address.UserId === Order.UserId && Order.OrderType == '3' ">
-    <h4>Dowóz na adres:</h4>
+    <h5>Dowóz na adres:</h5>
     <td class="p-3">Ulica: {{ address.Address }} </td>
     <td class="p-3">Kod pocztowy: {{ address.PostalCode }}</td>
     <td class="p-3">Miasto: {{ address.City }}</td>
-    <h4>Numer telefonu:</h4>
+    <h5>Numer telefonu:</h5>
     <td class="p-3">{{ address.PhoneNumber }}</td>
     </div>
     
