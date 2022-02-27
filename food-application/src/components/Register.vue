@@ -25,6 +25,9 @@
              <p class="mt-2 mb-1">Tworząc konto, wyrażasz zgodę na nasze  <br><a style="color: #000000;" href="#">Warunki i Prywatności</a>.</p>
           <p>Posiadasz juz konto? <a style="color: #000000;" href="./login">Zaloguj się</a>.</p>
   </div>
+          <div class="form-group">
+          <div v-if="message" class="alert alert-danger text-center mt-3" role="alert">{{message}}</div>
+        </div>
              </div>
              </div>
         </form>
@@ -36,11 +39,12 @@
 import {reactive} from 'vue';
 import {useRouter} from "vue-router";
 import Nav from './website/Nav.vue';
-
+import { ref } from 'vue';
 export default {
   components: { Nav },
   name: "Register",
   setup() {
+       const message = ref();
     const data = reactive({
       name: '',
       email: '',
@@ -53,12 +57,22 @@ export default {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
-      });
-
-      await router.push('/login');
+      }).then(async response => {
+      const data = await response.json();
+      if (!response.ok) {
+        const error = (data && data.message) || response.statusText;
+         message.value = error;
+         console.log(data.message);
+        return Promise.reject(error);
+        
+      }
+    router.push('/login')
+      
+    });
     }
 
     return {
+      message,
       data,
       submit
     }
