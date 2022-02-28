@@ -11,17 +11,12 @@
     <p>Nazwa uzytkownika: {{user_name}}</p>
     <p>Adres e-mail: {{ user_email }}</p>
     <p>Jesteś z nami od: {{ user_created }}</p>
+    <p>Ulica: {{user_address}}</p>
+    <p>Kod pocztowy i miasto: {{ user_postalCode }} {{user_city}}</p>
+    <p>Twój numer telefonu: {{ user_phone }}</p>
     </div>
                     </div>
                 </div>
-            <div class="mt-5 col-md-5 col-sm-6 col-xs-12">
-                <h1 class="text-center">Zamówienia</h1>
-                                <div class="feature-content d-flex align-items-center">
-                                    <div class="text-center m-3">
-
-                                    </div>
-                                </div>
-        </div>
     </div>
     </div>
 </template>
@@ -42,10 +37,14 @@ export default {
     const user_id = ref();
     const user_email = ref();
     const user_created = ref();
+    const user_address = ref();
+    const user_postalCode = ref();
+    const user_city = ref();
+    const user_phone = ref();
     
     onMounted(async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/user', {
+        const response = await fetch('http://127.0.0.1:8000/api/user', {
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });
@@ -57,6 +56,16 @@ export default {
         user_created.value = `${content.created_at} `.split("").slice(0, 10).join("");
         user_created.value = moment(user_created.value).locale('pl').format('D MMMM YYYY');
         await store.dispatch('setAuth', true);
+
+        const responseAddresses = await fetch('http://127.0.0.1:8000/api/address/' + user_id.value, {
+        headers: {'Content-Type': 'application/json'}
+        });
+        const contentAddresses = await responseAddresses.json();
+        const cont = await Object(contentAddresses.data[0]);
+        user_address.value = `${cont.Address} `;
+        user_postalCode.value = `${cont.PostalCode} `;
+        user_city.value = `${cont.City} `;
+        user_phone.value = `${cont.PhoneNumber} `;
       } catch (e) {
         await store.dispatch('setAuth', false);
       }
@@ -67,7 +76,11 @@ export default {
       user_name,
       user_id,
       user_email,
-      user_created
+      user_created,
+      user_address,
+      user_postalCode,
+      user_city,
+      user_phone,
     }
   }
 }

@@ -13,7 +13,7 @@
       <table class="table table-sm">
       <thead>    
       <tr v-if="category.Stat === 1 ">
-       <th scope="col"  style="font-size: 14px; font-weight: bold;">{{category.Name}}</th>             
+       <th scope="col"  style="font-size: 18px; font-weight: bold;">{{category.Name}}</th>             
        </tr>
        </thead>
  <tbody>
@@ -22,7 +22,7 @@
     :key="meal.CategoryName"
     >
        <td v-if="meal.Category == category.id && meal.StatusName === 'Aktywny' && category.Stat === 1 "> 
-      <div style="font-size: 1.2vw; font-weight: bold;">
+      <div style="font-size: 14px; font-weight: bold;">
        {{ meal.Name }}
        <div class="text-end">
        {{ meal.Price}}PLN

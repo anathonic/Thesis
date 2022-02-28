@@ -31,7 +31,7 @@
                  <li class="nav-item active"><a class="nav-link" href="/account">Konto</a></li>
                   <li class="nav-item active"><a class="nav-link" href="/order">Zamów online</a></li>
                    <li class="nav-item active"><a class="nav-link" @click="openModal">Koszyk</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="/orders">Twoje zamówienia</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/yourorders">Twoje zamówienia</a></li>
                      <li class="nav-item active"><a class="nav-link" href="/settings">Ustawienia</a></li>
                    <li class="nav-item active"><p @click="logout"  class="nav-link"  href=""> Wyloguj</p></li>
             </ul>

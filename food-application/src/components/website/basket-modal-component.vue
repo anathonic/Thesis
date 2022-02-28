@@ -99,6 +99,7 @@
             </div>
             <hr class="basketHr">
                 <div id="errorAlert" style="display: none" class="alert alert-danger" role="alert">Wypełnij poprawnie wszystkie pola.</div>
+                <div id="successAlert" style="display: none" class="alert alert-success" role="alert">Zamówienie złożone! Zostaniesz przekierowany na stronę z płatnościami.</div>
             <div class="modal-footer bg-light">
                 <button class="btn btn-info" @click="sendOrder">Zamów</button>
             </div>
@@ -168,8 +169,10 @@ import {useStore} from "vuex";
         sendOrder() {
             if(this.user_address == "" || this.user_postalCode == "" || this.user_city == "" ||
             this.user_phone == "" || this.user_name == "" || this.user_email == ""){
-                document.getElementById("errorAlert").style = "display: block";
+                document.getElementById("errorAlert").style = "display: block!important";
             }else{
+            document.getElementById("successAlert").style = "display: block!important";
+            setTimeout(() => {
             axios.post('order', {
                 OrderPrice: this.totalPrice,
                 UserId: this.user_id,
@@ -193,20 +196,10 @@ import {useStore} from "vuex";
                 }
                 console.log(response.data);
             })
-            }
             this.$router.push('/payments');
+            }, 4000);
+            }
         },
-
-        //Stara metoda do numerowania zamówień online
-        /*stringGen(){
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var x = 8;
-            for (var i = 0; i < x; i++)
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
-        },*/
     },
       setup() {
         const message = ref('You are not logged in!');
@@ -244,6 +237,7 @@ import {useStore} from "vuex";
       } catch (e) {
         await store.dispatch('setAuth', false);
       }
+      
     });
 
     return {

@@ -25,6 +25,7 @@ import UserOrders from "../views/user/UserOrders.vue"
 import Categories from "../views/admin/Categories.vue"
 import CategoriesEdit from "../views/admin/CategoriesEdit.vue"
 import AdminMenu from "../views/admin/AdminMenu.vue"
+import OrdersStats from "../views/admin/OrdersStats.vue"
 const routes = [
 
   {
@@ -33,7 +34,7 @@ const routes = [
     component: Dashboard,
     meta: {
       requiresAuth: true,
-
+      reload: true,
     }
 
   },
@@ -244,14 +245,25 @@ const routes = [
   component: Payments,
   meta: {
     requiresAuth: true,
+    reload: true,
   },  
 },
 {
-  path: '/userorders',
+  path: '/yourorders',
   name: 'UserOrders',
   component: UserOrders,
   meta: {
     requiresAuth: true,
+  },  
+},
+{
+  path: '/ordersstats',
+  name: 'OrdersStats',
+  component: OrdersStats,
+  props: true,
+  meta: {
+    requiresAuth: true,
+    permission: true
   },  
 },
 ];

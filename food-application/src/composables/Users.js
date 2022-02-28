@@ -10,7 +10,7 @@ export default function useUsers() {
     const errors = ref('')
 
     const getUsers = async () =>{
-        let res = await axios.get('http://localhost:8000/api/users');
+        let res = await axios.get('http://127.0.0.1:8000/api/users');
         users.value = res.data.data;
     }
 

@@ -53,7 +53,9 @@
     </div>
 
     <div class="col-md-2">
+      <router-link to="/ordersstats">
 <img src="../../../src/assets/mycollection/png/new/money.png" class="img-fluid" alt="Responsive image">
+      </router-link>
         <div class="text-center">
         <p>Płatności</p>
         </div>

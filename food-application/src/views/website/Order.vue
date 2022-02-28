@@ -18,8 +18,6 @@
                     </div>
                 </div>
             </div>
-
-
   <div class="card-body table-responsive m-5" :style="{display: isActive ? 'block' : 'none'}">
   <tbody>
     <tr
@@ -29,7 +27,7 @@
       <table class="table table-sm">
       <thead>    
       <tr v-if="category.Stat === 1 ">
-       <th scope="col"  style="font-size: 14px; font-weight: bold;">{{category.Name}}</th>             
+       <th scope="col"  style="font-size: 16px; font-weight: bold;">{{category.Name}}</th>             
        </tr>
        </thead>
  <tbody>
@@ -38,7 +36,7 @@
     :key="meal.CategoryName"
     >
        <td v-if="meal.Category == category.id && meal.StatusName === 'Aktywny' && category.Stat === 1 "> 
-      <div style="font-size: 1.2vw; font-weight: bold;">
+      <div style="font-size: 14px; font-weight: bold;">
        {{ meal.Name }}
        <div class="text-end">
        {{ meal.Price}}PLN
@@ -47,7 +45,9 @@
             </button>
        </div>
       </div>
+      <div style="font-size: 14px; font-weight: normal;">
      {{ meal.Description }}
+     </div>
      </td>
     </tr>
 </tbody>
@@ -55,39 +55,6 @@
     </tr>
   </tbody>
   </div>
-
-<!--
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table">
-                    <thead>
-                        <tr><th scope="col">Dania Główne</th></tr>
-                    </thead>
-                    <thead style=" border: none">
-                        <tr>
-                        <th scope="col">Danie</th>
-                        <th scope="col">Opis</th>
-                        <th scope="col">Cena</th>
-                        <th scope="col">Dodaj</th>
-                        </tr>
-                    </thead>
-                    <tbody v-for="meal in meals" :key="meal.MealId" >
-                        <tr v-if="meal.Status != '0'">
-                        <td class="pt-3">{{ meal.Name }}</td>
-                        <td class="pt-3">{{ meal.Description }}</td>
-                        <td class="pt-3" style="currency">{{ meal.Price }}<span> PLN</span></td>
-                        <td>
-                            <button class="button-add-to-basket" @click="addToBasket(meal.Name, meal.Price, meal.MealId)">
-                                <img src="../../../src/assets/mycollection/png/others/add-to-basket.png" class="img-fluid mt-0 ms-2" alt="Responsive image" style="width:32px">
-                            </button>
-                        </td>
-                        </tr>
-                    </tbody>
-
-                    </table>
-                </div>
-            </div>
-            -->
         </div>
     </div>
     <basketModal :totalPrice="$store.state.totalPrice" :order-data="this.orderData" v-if="showModal" :showModal=showModal @clicked="onChildClick" v-on:delete-row="deleteThisRow"></basketModal>
@@ -136,8 +103,6 @@ export default {
     name: 'Order',
     data () {
         return {
-            //meals: [],
-            drinks: [],
             url: window.location.origin,
             showModal: false,
             orderData: [],
@@ -169,20 +134,6 @@ export default {
                 console.log(response.data);
             })
         },
-        //getMeals() {
-        //    axios.get('menu/category/0').then(response => {
-         //       if(response.status >= 200 && response.status < 300){
-         //           this.meals = response.data.data
-          //      }
-          //      console.log(response.data);
-         //   })
-          //  axios.get('menu/category/1').then(response => {
-          //      if(response.status >= 200 && response.status < 300){
-         //           this.drinks = response.data.data
-          //      }
-          //      console.log(response.data);
-         //   })
-      //  },
         addToBasket(MealName, MealPrice, MealId) {
             $store.commit('add', {Name: MealName, Price: MealPrice, MealId: MealId});
             //eslint-disable-next-line
@@ -212,7 +163,6 @@ export default {
         },
     },
     mounted () {
-        //this.getMeals();
         this.getCategories();
         }
     }
