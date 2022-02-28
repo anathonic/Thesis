@@ -14,7 +14,7 @@
                 <li class="nav-item active"><a class="nav-link" href="/meals">Dania</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/ingredients">Składniki</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/categories">Kategorie</a></li>
-                <li class="nav-item active"><a class="nav-link" href="/menu">Menu</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/adminmenu">Menu</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/kitchen">Kuchnia</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/orders">Zamówienia</a></li>
                               <li class="nav-item active"><a class="nav-link" href="/payments">Płatności</a></li>

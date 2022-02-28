@@ -44,7 +44,7 @@
      <th class="pt-3" scope="row">{{ user.id }}</th>
      <td class="pt-3">{{ user.name }}</td>
      <td class="pt-3">{{ user.email }}</td>
-     <td class="pt-3">{{ user.role[0].name }}</td>
+     <td class="pt-3">{{ user.role[0].name}}</td>
      <td class="pt-3">{{ user.created_at.split("").slice(0, 10).join("") }}</td>
      <!-- <td>
      <img src="../../../src/assets/mycollection/png/others/edit.png" class="img-fluid mt-2 ms-2" alt="Responsive image" style="width:1.5vw"

@@ -24,7 +24,6 @@
     <label>Rola</label>
 <select class="form-select" v-model="data.role">
  <option value="2">Admin</option>
-<option value="3">Chef</option>
  <option value="1">User</option>
 </select>
  </div>
