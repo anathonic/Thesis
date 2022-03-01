@@ -28,7 +28,9 @@
           </button>
     </div>
     <div class="col-md-2">
+        <router-link to="/yourorders">
         <img src="../../../src/assets/mycollection/png/new/delivery-courier.png" class="img-fluid" alt="Responsive image">
+        </router-link>
         <div class="text-center">
         <p>Twoje Zamówienia</p>
         </div>
@@ -104,7 +106,7 @@ components: { UserNav, basketModal},
     
     onMounted(async () =>{
       try {
-        const respone = await fetch('http://localhost:8000/api/user',{
+        const respone = await fetch('http://127.0.0.1:8000/api/user',{
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',
         });
@@ -116,7 +118,7 @@ components: { UserNav, basketModal},
       }
     });
     const logout = async () => {
-      await fetch('http://localhost:8000/api/logout', {
+      await fetch('http://127.0.0.1:8000/api/logout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

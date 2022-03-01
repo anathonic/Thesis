@@ -50,8 +50,8 @@ components: { },
     }
   },
   created(){
-    this.getOrder();
-    this.timer = setInterval(this.getOrder, 500);
+    this.timer = setInterval(this.getOrder, 1000);
+    this.getOrder()
   },
   methods: {
       async getOrder() {
