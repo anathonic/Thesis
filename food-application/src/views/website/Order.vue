@@ -26,9 +26,9 @@
     >
       <table class="table table-sm">
       <thead>    
-      <tr v-if="category.Stat === 1 ">
-       <th scope="col"  style="font-size: 16px; font-weight: bold;">{{category.Name}}</th>             
-       </tr>
+        <tr v-if="category.Stat === 1 ">
+        <th scope="col"  style="font-size: 16px; font-weight: bold;">{{category.Name}}</th>             
+        </tr>
        </thead>
  <tbody>
  <tr

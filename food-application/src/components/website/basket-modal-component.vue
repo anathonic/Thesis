@@ -214,7 +214,7 @@ import {useStore} from "vuex";
     
     onMounted(async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/user', {
+        const response = await fetch('http://127.0.0.1:8000/api/user', {
           headers: {'Content-Type': 'application/json'},
           credentials: 'include'
         });
@@ -225,7 +225,7 @@ import {useStore} from "vuex";
         user_email.value = `${content.email} `;
         await store.dispatch('setAuth', true);
 
-        const responseAddresses = await fetch('http://localhost:8000/api/address/' + user_id.value, {
+        const responseAddresses = await fetch('http://127.0.0.1:8000/api/address/' + user_id.value, {
         headers: {'Content-Type': 'application/json'}
         });
         const contentAddresses = await responseAddresses.json();

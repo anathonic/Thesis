@@ -17,7 +17,7 @@
                 <li class="nav-item active"><a class="nav-link" href="/adminmenu">Menu</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/kitchen">Kuchnia</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/orders">Zamówienia</a></li>
-                              <li class="nav-item active"><a class="nav-link" href="/payments">Płatności</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/ordersstats">Płatności</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/usersmanagement">Ustawienia</a></li>
                 <li class="nav-item active"><p @click="logout"  class="nav-link"  href=""> Wyloguj</p></li>
             </ul>

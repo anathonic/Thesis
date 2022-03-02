@@ -15,7 +15,7 @@
        <p style="font-size: 14px; font-weight: bold; margin-bottom: 5px">Nr. {{order.OrderId}}</p>
        <p style="font-size: 14px; font-weight: normal; margin-bottom: 5px">{{order.OrderDate}}</p>   
        <p style="font-size: 14px; font-weight: normal; margin-bottom: 5px">Cena: {{order.OrderPrice}} PLN</p>
-       <p style="font-size: 14px; font-weight: normal; margin-bottom: 5px">Status: <b>{{order.StatusName}}</b></p>      
+       <p style="font-size: 14px; font-weight: normal; margin-bottom: 5px">Status: <b>{{order.Status}}</b></p>      
        </tr>
        <div class=".bg-light" style="display: flex; padding-left: 8px">
             <div style="display: flex; flex-direction: row"
@@ -44,7 +44,8 @@ export default {
     data () {
         return {
             orders: [],
-            timer: ""
+            timer: "",
+            statuses: [],
         }
     },
     created(){
@@ -56,12 +57,30 @@ export default {
             axios.get('userOrder/' + this.user_id).then(response => {
                 if(response.status >= 200 && response.status < 300){
                     this.orders = response.data.data
+                    if(this.orders != ""){
+                      this.statusNameInsert();
+                    }
                 }
            })
         },
         cancelAutoUpdate(){
             clearInterval(this.timer);
-        }
+        },
+        getStatuses(){
+            axios.get('order-statuses').then(response => {
+                if(response.status >= 200 && response.status < 300){
+                    this.statuses = response.data
+                }
+           })
+        },
+        statusNameInsert(){
+            this.cancelAutoUpdate();
+            this.orders.forEach(order => {
+              for(var i=0 ; i < Object.keys(this.statuses).length; i++){
+                if(order.Status == Object.keys(this.statuses)[i]){console.log(order.Status = Object.values(this.statuses)[i])}
+              }
+            })
+        },
     },
     beforeUnmount(){
         this.cancelAutoUpdate();
@@ -90,6 +109,7 @@ export default {
     }
   },
     mounted () {
+        this.getStatuses();
         this.getOrders();
         }
     }

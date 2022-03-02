@@ -41,7 +41,7 @@
             >
                 <td>{{order.OrderId}}</td>
                 <td>{{order.OrderPrice}} zł</td>
-                <td>{{order.StatusName}}</td>
+                <td>{{order.Status}}</td>
                 <td>{{order.OrderDate}}</td>
                 <td>{{order.EndDate}}</td>
                 <td>{{order.UserId}}</td>
@@ -55,7 +55,6 @@
 <script>
 import axios from 'axios'
 import AdminNav from '../../components/admin/AdminNav.vue'
-//import { onMounted, ref, computed } from "vue";
 
 export default {
 components: {AdminNav },
@@ -63,6 +62,7 @@ components: {AdminNav },
         return {
             statistics: [],
             paidOrders: [],
+            statuses: [],
     }
 },
 methods: {
@@ -77,12 +77,30 @@ getPaidOrders() {
     axios.get('getPaidOrdersWeb').then(response => {
         if(response.status >= 200 && response.status < 300){
             this.paidOrders = response.data
+            if(this.paidOrders != ""){
+                this.statusNameInsert();
+            }
+        }
+    })
+},
+getStatuses(){
+    axios.get('order-statuses').then(response => {
+        if(response.status >= 200 && response.status < 300){
+            this.statuses = response.data
+        }
+    })
+},
+statusNameInsert(){
+    this.paidOrders.forEach(order => {
+        for(var i=0 ; i < Object.keys(this.statuses).length; i++){
+        if(order.Status == Object.keys(this.statuses)[i]){console.log(order.Status = Object.values(this.statuses)[i])}
         }
     })
 },
 },
 mounted () {
     this.getStats();
+    this.getStatuses();
     this.getPaidOrders();
 }
 }
