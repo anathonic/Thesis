@@ -22,7 +22,7 @@
                 v-for="index in order.Details.length"
                 :key="index"
                 >
-                <p style="font-size: 14px; margin-bottom: 5px;">{{order.Details[index-1].Name}}</p>
+                <p style="font-size: 14px; margin-bottom: 5px;">{{order.Details[index-1].Quantity}} x {{order.Details[index-1].Name}}</p>
             </div>
         </div>
       </tbody>

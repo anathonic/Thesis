@@ -91,7 +91,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="checkbox" class="form-check-input" id="checkbox">
+                            <input type="checkbox" class="form-check-input" id="checkbox" required>
                             <label class="form-check-label" style="padding-left: 6px;" for="checkbox">Akceptuję regulamin oraz politykę prywatności.</label>
                         </div>
                     </div>
@@ -147,6 +147,11 @@ import {useStore} from "vuex";
     },
     methods: {
         dialogShow(index, price){
+            const modal = document.querySelector('.modal');
+            modal.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
             this.deleteIndex = index;
             this.deletePrice = price;
             this.deleteDialog=true;
