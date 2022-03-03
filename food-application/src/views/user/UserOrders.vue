@@ -54,7 +54,7 @@ export default {
     },
     methods: {
          async getOrders() {
-            axios.get('userOrder/' + this.user_id).then(response => {
+            axios.get('userOrder/', { params: { UserId: this.user_id } }).then(response => {
                 if(response.status >= 200 && response.status < 300){
                     this.orders = response.data.data
                     if(this.orders != ""){
