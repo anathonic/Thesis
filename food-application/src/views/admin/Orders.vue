@@ -118,7 +118,7 @@ components: {AdminNav },
           const searchedOrders = computed(()=> {
             return Orders.value.filter((Order)=>{
               return(
-                Order.OrderNo.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
+                Order.OrderNo.toString().toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
               );
             });
           });
